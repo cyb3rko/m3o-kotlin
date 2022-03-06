@@ -1,3 +1,11 @@
+<div align="center">
+    <p>
+        <img src="https://discordapp.com/api/guilds/861917584437805127/widget.png?style=banner2" alt="Discord Banner"/>
+    </p>
+</div>
+
+---
+
 # M3O Kotlin (JVM) Client
 
 This is the Kotlin client to access APIs on the M3O Platform
