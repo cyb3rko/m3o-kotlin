@@ -12,10 +12,9 @@ import io.ktor.http.*
 
 object M3O {
     private const val BASE_URL = "https://api.m3o.com/v1"
+    private const val BASE_URL_STREAM = "wss://api.m3o.com/v1"
+    internal lateinit var authorization: Pair<String, String>
     internal lateinit var ktorHttpClient: HttpClient
-
-    // Client for websocket requests (not functional at the moment)
-//    internal lateinit var ktorHttpStreamClient: HttpClient
 
     fun initialize(apiKey: String) {
         Log.initialize()
@@ -24,6 +23,8 @@ object M3O {
         if (!Regex("[a-zA-Z0-9]+").matches(apiKey) || apiKey.length > 64) {
             throw InvalidParameterException("The M3O API Key contains invalid characters or does not have 48 characters.")
         }
+
+        authorization = "Authorization" to "Bearer $apiKey"
 
         ktorHttpClient = HttpClient(Apache) {
             install(JsonFeature) {
@@ -36,7 +37,7 @@ object M3O {
 
             install(DefaultRequest) {
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
-                header(HttpHeaders.Authorization, "Bearer $apiKey")
+                header(HttpHeaders.Authorization, authorization.second)
             }
 
             // Logging for debugging
@@ -52,29 +53,11 @@ object M3O {
 //            }
         }
 
-        // Client for websocket requests (not functional at the moment)
-
-//        ktorHttpStreamClient = HttpClient(OkHttp) {
-//            install(WebSockets)
-//
-//            install(Logging) {
-//                logger = object : Logger {
-//                    override fun log(message: String) {
-//                        Log.i("Logger Ktor => $message")
-//                    }
-//
-//                }
-//                level = LogLevel.ALL
-//            }
-//
-//            install(DefaultRequest) {
-//                header(HttpHeaders.ContentType, ContentType.Application.Json)
-//                header(HttpHeaders.Authorization, "Bearer $apiKey")
-//            }
-//        }
-
         Log.i("Ktor M3O Client initialized.")
     }
 
-    fun getUrl(service: String, endpoint: String) = "$BASE_URL/$service/$endpoint"
+    fun getUrl(service: String, endpoint: String, stream: Boolean = false): String {
+        val url = if (!stream) BASE_URL else BASE_URL_STREAM
+        return "$url/$service/$endpoint"
+    }
 }
