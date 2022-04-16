@@ -6,7 +6,6 @@ import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
-import io.ktor.client.features.websocket.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 
@@ -30,10 +29,9 @@ object M3O {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
                     prettyPrint = true
+                    ignoreUnknownKeys = true
                 })
             }
-
-            install(WebSockets)
 
             install(DefaultRequest) {
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
