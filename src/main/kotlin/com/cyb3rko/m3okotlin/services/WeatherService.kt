@@ -12,7 +12,7 @@ private const val SERVICE = "weather"
 
 object WeatherService {
 
-    suspend fun forecast(days: Int = 1, location: String): WeatherForecastResponse {
+    suspend fun forecast(location: String, days: Int = 1): WeatherForecastResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Forecast")) {
             body = WeatherForecastRequest(days, location)
         }
