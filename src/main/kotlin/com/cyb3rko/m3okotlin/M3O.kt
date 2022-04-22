@@ -26,6 +26,9 @@ object M3O {
         authorization = "Authorization" to "Bearer $apiKey"
 
         ktorHttpClient = HttpClient(Apache) {
+            followRedirects = true
+            expectSuccess = false
+
             install(JsonFeature) {
                 serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
                     prettyPrint = true
