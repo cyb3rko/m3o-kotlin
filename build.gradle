@@ -2,9 +2,44 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.10'
 }
+apply plugin: 'maven-publish'
+
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+
+def getVersionName = { ->
+    return "0.1.0"
+}
+
+def getArtificatId = { ->
+    return "m3okotlin"
+}
+
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId 'com.cyb3rko'
+            artifactId getArtificatId()
+            version getVersionName()
+            artifact("out/artifacts/m3o_kotlin_main_jar/m3o-kotlin.main.jar")
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/cyb3rko/m3o-kotlin")
+            credentials {
+                username = githubProperties['gpr.usr']
+                password = githubProperties['gpr.key']
+            }
+        }
+    }
+}
 
 group 'com.cyb3rko'
-version '0.0.1'
+version '0.1.0'
 
 repositories {
     mavenCentral()
