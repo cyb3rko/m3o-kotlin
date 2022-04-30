@@ -19,7 +19,7 @@ This is the handcrafted Kotlin client to access APIs on the M3O Platform.
 
 ## What is M3O
 
-[M3O](https://m3o.com/) is an attempt to build a new public cloud platform with higher level building blocks for the Next generation of developers. M3O is powered by the open source [Micro](https://github.com/micro/micro) platform and programmable real world [Micro Services](https://github.com/micro/services).
+M3O ([website](https://m3o.com/), [github repo](https://github.com/m3o/m3o)) is an attempt to build a new public cloud platform with higher level building blocks for the Next generation of developers. M3O is powered by the open source [Micro](https://github.com/micro/micro) platform and programmable real world [Micro Services](https://github.com/micro/services).
 
 M3O APIs include DB, Cache, Stream, MQ, Events, Functions, App, SMS and more.
 
