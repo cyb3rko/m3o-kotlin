@@ -1,7 +1,6 @@
 package com.cyb3rko.m3okotlin
 
 import io.ktor.client.*
-import io.ktor.client.engine.apache.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
@@ -25,7 +24,7 @@ object M3O {
 
         authorization = "Authorization" to "Bearer $apiKey"
 
-        ktorHttpClient = HttpClient(Apache) {
+        ktorHttpClient = HttpClient {
             followRedirects = true
             expectSuccess = false
 
@@ -59,7 +58,7 @@ object M3O {
 
     internal fun getKtorHttpMultipartClient(): HttpClient {
         if (!::ktorHttpMultipartClient.isInitialized) {
-            ktorHttpMultipartClient = HttpClient(Apache) {
+            ktorHttpMultipartClient = HttpClient {
                 install(DefaultRequest) {
                     header(HttpHeaders.Authorization, authorization.second)
                 }
