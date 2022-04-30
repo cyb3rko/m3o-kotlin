@@ -2,7 +2,7 @@ package com.cyb3rko.m3okotlin
 
 import java.util.logging.Logger
 
-object Log {
+internal object Log {
     private lateinit var log: Logger
 
     internal fun initialize() {
