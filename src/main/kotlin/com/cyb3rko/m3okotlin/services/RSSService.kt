@@ -2,6 +2,7 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.*
+import com.cyb3rko.m3okotlin.data.RSSListResponse.RSSFeed
 import io.ktor.client.request.*
 
 private const val SERVICE = "rss"
@@ -62,4 +63,10 @@ object RSSService {
             body = RSSRemoveRequest(name)
         }
     }
+
+    suspend fun RSSFeed.feed(limit: Int = 25, offset: Int = 0) = feed(
+        this.name, limit, offset
+    )
+
+    suspend fun RSSFeed.remove() = remove(this.name)
 }
