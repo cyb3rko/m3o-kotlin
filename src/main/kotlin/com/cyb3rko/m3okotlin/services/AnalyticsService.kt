@@ -53,4 +53,10 @@ object AnalyticsService {
             body = AnalyticsTrackRequest(name)
         }
     }
+
+    suspend fun AnalyticsEvent.delete() = delete(this.name)
+
+    suspend fun AnalyticsEvent.read() = read(this.name)
+
+    suspend fun AnalyticsEvent.track() = track(this.name)
 }
