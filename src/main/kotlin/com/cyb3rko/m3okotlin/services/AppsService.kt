@@ -88,4 +88,25 @@ object AppsService {
             body = AppsRunRequest(branch, envVars, name, port, region, repo)
         }
     }
+
+    suspend fun App.delete() = delete(this.name)
+
+    suspend fun App.logs(logsType: String) = logs(logsType, this.name)
+
+    suspend fun App.resolve() = resolve(this.id)
+
+    suspend fun App.run(
+        port: Int,
+        region: String,
+        repo: String,
+        branch: String = "",
+        envVars: Map<String, String> = mapOf()
+    ) = run(
+        this.name,
+        port,
+        region,
+        repo,
+        branch,
+        envVars
+    )
 }

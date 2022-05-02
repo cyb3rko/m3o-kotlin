@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 internal data class AppsDeleteRequest(val name: String)
 
 @Serializable
-data class AppsListResponse(val services: List<AppsService>)
+data class AppsListResponse(val services: List<App>)
 
 @Serializable
 internal data class AppsLogsRequest(
@@ -58,13 +58,13 @@ internal data class AppsRunRequest(
 )
 
 @Serializable
-data class AppsRunResponse(val service: AppsService)
+data class AppsRunResponse(val service: App)
 
 @Serializable
 internal data class AppsStatusRequest(val name: String)
 
 @Serializable
-data class AppsStatusResponse(val service: AppsService)
+data class AppsStatusResponse(val service: App)
 
 @Serializable
 internal data class AppsUpdateRequest(
@@ -76,7 +76,7 @@ internal data class AppsUpdateRequest(
 // Data (multiple use)
 
 @Serializable
-data class AppsService(
+data class App(
     val branch: String,
     val created: String,
     @SerialName("custom_domains")
