@@ -6,6 +6,7 @@ import com.cyb3rko.m3okotlin.data.YouTubeEmbedRequest
 import com.cyb3rko.m3okotlin.data.YouTubeEmbedResponse
 import com.cyb3rko.m3okotlin.data.YouTubeSearchRequest
 import com.cyb3rko.m3okotlin.data.YouTubeSearchResponse
+import com.cyb3rko.m3okotlin.data.YouTubeSearchResponse.YouTubeSearchResult
 import io.ktor.client.request.*
 
 private const val SERVICE = "youtube"
@@ -39,4 +40,6 @@ object YouTubeService {
             body = YouTubeSearchRequest(query)
         }
     }
+
+    suspend fun YouTubeSearchResult.embed() = embed(this.url)
 }
