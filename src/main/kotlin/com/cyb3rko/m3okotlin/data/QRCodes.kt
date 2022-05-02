@@ -1,6 +1,5 @@
 package com.cyb3rko.m3okotlin.data
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable

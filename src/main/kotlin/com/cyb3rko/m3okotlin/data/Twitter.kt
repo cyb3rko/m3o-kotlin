@@ -23,9 +23,9 @@ data class TwitterTrendsResponse(val trends: List<TwitterTrend>) {
     @Serializable
     data class TwitterTrend(
         val name: String,
-        val url: String,
         @SerialName("tweet_volume")
-        val tweetVolume: String
+        val tweetVolume: String,
+        val url: String
     )
 }
 
@@ -37,31 +37,31 @@ data class TwitterUserResponse(val profile: TwitterProfile, val status: TwitterS
 
     @Serializable
     data class TwitterProfile(
-        val id: String,
-        val name: String,
-        val username: String,
-        val description: String,
         @SerialName("created_at")
         val createdAt: String,
-        val location: String,
+        val description: String,
         val followers: String,
-        val private: Boolean,
-        val verified: Boolean,
+        val id: String,
         @SerialName("image_url")
-        val imageUrl: String
+        val imageUrl: String,
+        val location: String,
+        val name: String,
+        val private: Boolean,
+        val username: String,
+        val verified: Boolean
     )
 
     @Serializable
     data class TwitterStatus(
-        val id: String,
-        val text: String,
-        val username: String,
         @SerialName("created_at")
         val createdAt: String,
+        @SerialName("favourited_count")
+        val favouritedCount: String,
+        val id: String,
         @SerialName("retweeted_count")
         val retweetedCount: String,
-        @SerialName("favourited_count")
-        val favouritedCount: String
+        val text: String,
+        val username: String
     )
 }
 
@@ -69,13 +69,13 @@ data class TwitterUserResponse(val profile: TwitterProfile, val status: TwitterS
 
 @Serializable
 data class Tweet(
-    val id: String,
-    val text: String,
-    val username: String,
     @SerialName("created_at")
     val createdAt: String,
+    @SerialName("favourited_count")
+    val favouritedCount: String,
+    val id: String,
     @SerialName("retweeted_count")
     val retweetedCount: String,
-    @SerialName("favourited_count")
-    val favouritedCount: String
+    val text: String,
+    val username: String
 )

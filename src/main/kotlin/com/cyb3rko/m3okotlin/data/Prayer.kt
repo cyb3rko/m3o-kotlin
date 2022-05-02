@@ -15,20 +15,20 @@ internal data class PrayerRequest(
 data class PrayerResponse(
     val date: String,
     val days: Int,
-    val location: String,
     val latitude: Double,
+    val location: String,
     val longitude: Double,
     val times: List<PrayerTime>
 ) {
 
     @Serializable
     data class PrayerTime(
+        val asr: String,
         val date: String,
         val fajr: String,
-        val sunrise: String,
-        val zuhr: String,
-        val asr: String,
+        val isha: String,
         val maghrib: String,
-        val isha: String
+        val sunrise: String,
+        val zuhr: String
     )
 }

@@ -6,14 +6,14 @@ import kotlinx.serialization.Serializable
 internal data class URLsListRequest(val shortURL: String)
 
 @Serializable
-data class URLsListResponse(val urlPairs: List<URLsEntry>) {
+data class URLsListResponse(val urlPairs: List<URL>) {
 
     @Serializable
-    data class URLsEntry(
-        val shortURL: String,
-        val destinationURL: String,
+    data class URL(
         val created: String,
-        val hitCount: String
+        val destinationURL: String,
+        val hitCount: String,
+        val shortURL: String
     )
 }
 

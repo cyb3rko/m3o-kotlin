@@ -9,8 +9,20 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "place"
 
+/**
+ * **Search for places**
+ *
+ * Search for place information, including points of interest, categories and
+ * geographic locations. Search by geolocation or by text query.
+ *
+ * @since 0.1.0
+ */
 object PlacesService {
 
+    /**
+     * Find places nearby using a location
+     * @since 0.1.0
+     */
     suspend fun nearby(
         location: String,
         keyword: String = "",
@@ -24,6 +36,10 @@ object PlacesService {
         }
     }
 
+    /**
+     * Search for places by text query
+     * @since 0.1.0
+     */
     suspend fun search(
         location: String,
         query: String,

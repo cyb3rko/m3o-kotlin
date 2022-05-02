@@ -26,9 +26,9 @@ data class FilesSaveResponse(val url: String)
 @Serializable
 data class File(
     val content: String,
+    val created: String = "",
+    val metadata: Map<String, String> = emptyMap(),
     val path: String,
     val project: String,
-    val metadata: Map<String, String> = emptyMap(),
-    val created: String = "",
     val updated: String = ""
 )

@@ -6,40 +6,76 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "app"
 
+/**
+ * **Serverless app deployment**
+ *
+ * Deploy serverless apps and services from source. Supports multiple regions
+ * and provides a custom HTTPS URL.
+ *
+ * @since 0.1.0
+ */
 object AppsService {
 
+    /**
+     * Delete an app
+     * @since 0.1.0
+     */
     suspend fun delete(name: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
             body = AppsDeleteRequest(name)
         }
     }
 
+    /**
+     * List all the apps
+     * @since 0.1.0
+     */
     suspend fun list(): AppsListResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "List"))
     }
 
+    /**
+     * Get the logs for an app
+     * @since 0.1.0
+     */
     suspend fun logs(logsType: String, name: String): AppsLogsResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Logs")) {
             body = AppsLogsRequest(logsType, name)
         }
     }
 
+    /**
+     * Return the support regions
+     * @since 0.1.0
+     */
     suspend fun regions(): AppsRegionsResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Regions"))
     }
 
+    /**
+     * Reserve apps beyond the free quota. Call Run after.
+     * @since 0.1.0
+     */
     suspend fun reserve(name: String): AppsReserveResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Reserve")) {
             body = AppsReserveRequest(name)
         }
     }
 
+    /**
+     * Resolve an app by id to its raw backend endpoint
+     * @since 0.1.0
+     */
     suspend fun resolve(id: String): AppsResolveResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Resolve")) {
             body = AppsResolveRequest(id)
         }
     }
 
+    /**
+     * Run an app from source
+     * @since 0.1.0
+     */
     suspend fun run(
         name: String,
         port: Int,

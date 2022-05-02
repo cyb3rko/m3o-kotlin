@@ -6,8 +6,21 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "user"
 
+/**
+ * **Authentication and user management**
+ *
+ * The user service provides user account management and authentication. It
+ * includes the ability to send verification and password reset emails.
+ *
+ * @since 0.1.0
+ */
 object UsersService {
 
+    /**
+     * Create a new user account. The email address and username for the account
+     * must be unique.
+     * @since 0.1.0
+     */
     suspend fun create(
         email: String,
         password: String,
@@ -20,18 +33,32 @@ object UsersService {
         }
     }
 
+    /**
+     * Delete an account by id
+     * @since 0.1.0
+     */
     suspend fun delete(id: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
             body = UsersDeleteRequest(id)
         }
     }
 
+    /**
+     * List all users. Returns a paged list of results
+     * @since 0.1.0
+     */
     suspend fun list(limit: Int = 25, offset: Int = 0): UsersListResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "List")) {
             body = UsersListRequest(limit, offset)
         }
     }
 
+    /**
+     * Login using username or email. The response will return a new session for
+     * successful login, 401 in the case of login failure and 500 for any other
+     * error
+     * @since 0.1.0
+     */
     suspend fun login(
         password: String,
         email: String = "",
@@ -42,18 +69,30 @@ object UsersService {
         }
     }
 
+    /**
+     * Logout a user account
+     * @since 0.1.0
+     */
     suspend fun logout(sessionID: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Logout")) {
             body = UsersLogoutRequest(sessionID)
         }
     }
 
+    /**
+     * Logout of all user's sessions
+     * @since 0.1.0
+     */
     suspend fun logoutAll(userID: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "LogoutAll")) {
             body = UsersLogoutAllRequest(userID)
         }
     }
 
+    /**
+     * Read an account by id, username or email. Only one need to be specified.
+     * @since 0.1.0
+     */
     suspend fun read(
         email: String = "",
         id: String = "",
@@ -64,12 +103,22 @@ object UsersService {
         }
     }
 
+    /**
+     * Read a session by the session id. In the event it has expired or is not
+     * found and error is returned.
+     * @since 0.1.0
+     */
     suspend fun readSession(sessionID: String): UsersReadSessionResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "ReadSession")) {
             body = UsersReadSessionRequest(sessionID)
         }
     }
 
+    /**
+     * Reset password with the code sent by the "SendPasswordResetEmail"
+     * endpoint.
+     * @since 0.1.0
+     */
     suspend fun resetPassword(
         code: String,
         confirmPassword: String,
@@ -81,6 +130,10 @@ object UsersService {
         }
     }
 
+    /**
+     * Login using email only - Passwordless
+     * @since 0.1.0
+     */
     suspend fun sendMagicLink(
         address: String,
         email: String,
@@ -94,6 +147,11 @@ object UsersService {
         }
     }
 
+    /**
+     * Send an email with a verification code to reset password. Call
+     * "ResetPassword" endpoint once user provides the code.
+     * @since 0.1.0
+     */
     suspend fun sendPasswordResetEmail(
         email: String,
         fromName: String,
@@ -106,6 +164,10 @@ object UsersService {
         }
     }
 
+    /**
+     * Send a verification email to a user.
+     * @since 0.1.0
+     */
     suspend fun sendVerificationEmail(
         email: String,
         failureRedirectURL: String,
@@ -119,6 +181,10 @@ object UsersService {
         }
     }
 
+    /**
+     * Update the account username or email
+     * @since 0.1.0
+     */
     suspend fun update(
         id: String,
         email: String = "",
@@ -130,6 +196,10 @@ object UsersService {
         }
     }
 
+    /**
+     * Update the account password
+     * @since 0.1.0
+     */
     suspend fun updatePassword(
         confirmPassword: String,
         newPassword: String,
@@ -141,12 +211,23 @@ object UsersService {
         }
     }
 
+    /**
+     * Verify the email address of an account from a token sent in an email to
+     * the user.
+     * @since 0.1.0
+     */
     suspend fun verifyEmail(email: String, token: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "VerifyEmail")) {
             body = UsersVerifyEmailRequest(email, token)
         }
     }
 
+    /**
+     * Check whether the token attached to MagicLink is valid or not. Ideally,
+     * you need to call this endpoint from your http request handler that
+     * handles the endpoint which is specified in the SendMagicLink request.
+     * @since 0.1.0
+     */
     suspend fun verifyToken(token: String): UsersVerifyTokenResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "VerifyToken")) {
             body = UsersVerifyTokenRequest(token)

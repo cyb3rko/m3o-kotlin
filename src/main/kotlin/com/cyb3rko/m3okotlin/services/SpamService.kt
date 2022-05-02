@@ -7,8 +7,19 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "spam"
 
+/**
+ * **Check if an email is spam**
+ *
+ * An API to classify emails against spam detection rules.
+ *
+ * @since 0.1.0
+ */
 object SpamService {
 
+    /**
+     * Check whether an email is likely to be spam based on its attributes
+     * @since 0.1.0
+     */
     suspend fun classify(
         emailBody: String = "",
         from: String = "",

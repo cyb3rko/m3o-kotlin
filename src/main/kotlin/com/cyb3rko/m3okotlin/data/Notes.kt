@@ -8,44 +8,44 @@ import kotlinx.serialization.Serializable
 internal data class NotesCreateRequest(val text: String, val title: String)
 
 @Serializable
-data class NotesCreateResponse(val note: NotesNote)
+data class NotesCreateResponse(val note: Note)
 
 @Serializable
 internal data class NotesDeleteRequest(val id: String)
 
 @Serializable
-data class NotesDeleteResponse(val note: NotesNote)
+data class NotesDeleteResponse(val note: Note)
 
 @Serializable
 internal data class NotesEventsRequest(val id: String)
 
 @Serializable
-data class NotesEventsResponse(val event: String, val note: NotesNote)
+data class NotesEventsResponse(val event: String, val note: Note)
 
 @Serializable
-data class NotesListResponse(val notes: List<NotesNote>)
+data class NotesListResponse(val notes: List<Note>)
 
 @Serializable
 internal data class NotesReadRequest(val id: String)
 
 @Serializable
-data class NotesReadResponse(val note: NotesNote)
+data class NotesReadResponse(val note: Note)
 
 @Serializable
 internal data class NotesUpdateRequest(val note: NotesUpdate)
 
 @Serializable
-data class NotesUpdateResponse(val note: NotesNote)
+data class NotesUpdateResponse(val note: Note)
 
 // Data (multiple use)
 
 @Serializable
-data class NotesNote(
-    val id: String,
+data class Note(
     val created: String,
-    val updated: String,
+    val id: String,
+    val text: String,
     val title: String,
-    val text: String
+    val updated: String
 )
 
 @Serializable

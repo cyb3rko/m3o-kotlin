@@ -14,8 +14,24 @@ import java.io.File
 
 private const val SERVICE = "image"
 
+/**
+ * **Upload, resize, and convert images**
+ *
+ * The image service provides upload, resize, and image conversion. It provides
+ * a CDN for uploaded images and a simple API.
+ *
+ * @since 0.1.0
+ */
 object ImageService {
 
+    /**
+     * Convert an image from one format (jpeg, png etc.) to an other either on
+     * the fly (from base64 to base64), or by uploading the conversion result.
+     * To use the file parameter you need to send the request as a
+     * multipart/form-data rather than the usual application/json with each
+     * parameter as a form field.
+     * @since 0.1.0
+     */
     suspend fun convert(
         name: String,
         base64: String = "",
@@ -49,12 +65,25 @@ object ImageService {
         } else throw InvalidParameterException("No image found, \"base64\", \"file\" and \"url\" are empty.")
     }
 
+    /**
+     * Delete an image previously uploaded.
+     * @since 0.1.0
+     */
     suspend fun delete(url: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
             body = ImageDeleteRequest(url)
         }
     }
 
+    /**
+     * Resize an image on the fly without storing it (by sending and receiving a
+     * base64 encoded image), or resize and upload depending on parameters. If
+     * one of width or height is 0, the image aspect ratio is preserved.
+     * Optional cropping. To use the file parameter you need to send the request
+     * as a multipart/form-data rather than the usual application/json with each
+     * parameter as a form field.
+     * @since 0.1.0
+     */
     suspend fun resize(
         name: String,
         height: Int,
@@ -96,6 +125,14 @@ object ImageService {
         } else throw InvalidParameterException("No image found, \"base64\", \"file\" and \"url\" are empty.")
     }
 
+    /**
+     * Upload an image by either sending a base64 encoded image to this endpoint
+     * or a URL. To resize an image before uploading, see the Resize endpoint.
+     * To use the file parameter you need to send the request as a
+     * multipart/form-data rather than the usual application/json with each
+     * parameter as a form field.
+     * @since 0.1.0
+     */
     suspend fun upload(
         name: String,
         base64: String = "",

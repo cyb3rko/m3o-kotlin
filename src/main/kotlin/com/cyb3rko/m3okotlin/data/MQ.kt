@@ -3,10 +3,7 @@ package com.cyb3rko.m3okotlin.data
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class MQPublishRequest(
-    val message: MQMessage,
-    val topic: String
-)
+internal data class MQPublishRequest(val message: MQMessage, val topic: String)
 
 @Serializable
 data class MQMessage(
@@ -19,7 +16,4 @@ data class MQMessage(
 internal data class MQSubscribeRequest(val topic: String)
 
 @Serializable
-data class MQSubscribeResponse(
-    val message: MQMessage,
-    val topic: String
-)
+data class MQSubscribeResponse(val message: MQMessage, val topic: String)

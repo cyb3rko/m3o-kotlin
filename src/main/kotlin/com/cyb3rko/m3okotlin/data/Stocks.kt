@@ -30,10 +30,10 @@ internal data class StocksQuoteRequest(val symbol: String)
 data class StocksQuoteResponse(
     @SerialName("ask_price")
     val askPrice: Float,
-    @SerialName("bid_price")
-    val bidPrice: Float,
     @SerialName("ask_size")
     val askSize: Int,
+    @SerialName("bid_price")
+    val bidPrice: Float,
     @SerialName("bid_size")
     val bidSize: Int,
     val symbol: String,

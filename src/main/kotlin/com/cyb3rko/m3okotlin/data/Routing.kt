@@ -23,13 +23,13 @@ data class RoutingDirectionsResponse(
         val instruction: String,
         val intersections: List<RoutingIntersection>,
         val maneuver: RoutingManeuver,
-        val name: String,
+        val name: String
     ) {
 
         @Serializable
         data class RoutingIntersection(
-            val location: RoutingCoordinates,
-            val bearings: List<Int>
+            val bearings: List<Int>,
+            val location: RoutingCoordinates
         )
 
         @Serializable

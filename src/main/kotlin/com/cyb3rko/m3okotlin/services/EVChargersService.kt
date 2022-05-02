@@ -6,12 +6,29 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "evchargers"
 
+/**
+ * **Find electric vehicle (EV) chargers wherever you go**
+ *
+ * This is the E(lectric) V(ehicle) chargers API.
+ *
+ * @since 0.1.0
+ */
 object EVChargersService {
 
+    /**
+     * Retrieve reference data as used by this API and in conjunction with the
+     * Search endpoint
+     * @since 0.1.0
+     */
     suspend fun referenceData(): EVChargersReferenceDataResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "ReferenceData"))
     }
 
+    /**
+     * Search by giving a coordinate and a max distance, or bounding box and
+     * optional filters
+     * @since 0.1.0
+     */
     suspend fun search(
         box: EVChargerLocationBox = EVChargerLocationBox(EVChargerCoordinates(0.0, 0.0), EVChargerCoordinates(0.0, 0.0)),
         connectionTypes: List<String> = emptyList(),

@@ -6,9 +6,7 @@ import kotlinx.serialization.Serializable
 internal data class JokesRequest(val count: Int)
 
 @Serializable
-data class JokesResponse(
-    val jokes: List<Joke>
-) {
+data class JokesResponse(val jokes: List<Joke>) {
 
     @Serializable
     data class Joke(

@@ -8,8 +8,20 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "avatar"
 
+/**
+ * **Generate an avatar**
+ *
+ * Generate a unique avatar for your user profiles, NFT crypto punks and much
+ * more.
+ *
+ * @since 0.1.0
+ */
 object AvatarService {
 
+    /**
+     * Generate an unique avatar
+     * @since 0.1.0
+     */
     suspend fun generate(
         format: String = "",
         gender: String = "",

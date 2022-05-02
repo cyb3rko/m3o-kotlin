@@ -29,115 +29,115 @@ data class EVChargersReferenceDataResponse(
 
 @Serializable
 data class EVChargerType(
-    val id: String,
-    val title: String,
     val comments: String,
+    val id: String,
     @SerialName("is_fast_charge_capable")
-    val isFastChargeCapable: Boolean
+    val isFastChargeCapable: Boolean,
+    val title: String
 )
 
 @Serializable
 data class EVChargerCheckinStatusType(
     val id: String,
-    val title: String,
+    @SerialName("is_automated")
+    val isAutomated: Boolean,
     @SerialName("is_positive")
     val isPositive: Boolean,
-    @SerialName("is_automated")
-    val isAutomated: Boolean
+    val title: String
 )
 
 @Serializable
 data class EVChargerConnectionType(
-    val id: String,
-    val title: String,
     @SerialName("formal_name")
     val formalName: String,
+    val id: String,
     @SerialName("is_discontinued")
     val isDiscontinued: Boolean,
     @SerialName("is_obsolete")
-    val isObsolete: Boolean
+    val isObsolete: Boolean,
+    val title: String,
 )
 
 @Serializable
 data class EVChargerCountry(
+    @SerialName("continent_code")
+    val continentCode: String,
     val id: String,
-    val title: String,
     @SerialName("iso_code")
     val isoCode: String,
-    @SerialName("continent_code")
-    val continentCode: String
+    val title: String,
 )
 
 @Serializable
 data class EVChargerCurrentType(
+    val description: String,
     val id: String,
-    val title: String,
-    val description: String
+    val title: String
 )
 
 @Serializable
 data class EVChargerDataProvider(
-    val id: String,
-    val title: String,
-    val website: String,
     val comments: String,
     @SerialName("data_provider_status_type")
     val dataProviderStatusType: EVChargerDataProviderStatusType,
-    val license: String
+    val id: String,
+    val license: String,
+    val title: String,
+    val website: String
 )
 
 @Serializable
 data class EVChargerDataProviderStatusType(
     val id: String,
-    val title: String,
     @SerialName("is_provider_enabled")
-    val isProviderEnabled: Boolean
+    val isProviderEnabled: Boolean,
+    val title: String
 )
 
 @Serializable
 data class EVChargerOperator(
-    val id: String,
-    val title: String,
-    val website: String,
     val comments: String,
-    @SerialName("is_private_individual")
-    val isPrivateIndividual: Boolean,
     @SerialName("contact_email")
     val contactEmail: String,
+    @SerialName("fault_report_email")
+    val faultReportEmail: String,
+    val id: String,
+    @SerialName("is_private_individual")
+    val isPrivateIndividual: Boolean,
     @SerialName("phone_primary")
     val phonePrimary: String,
     @SerialName("phone_secondary")
     val phoneSecondary: String,
-    @SerialName("fault_report_email")
-    val faultReportEmail: String
+    val title: String,
+    val website: String
 )
 
 @Serializable
 data class EVChargerStatusType(
     val id: String,
-    val title: String,
     @SerialName("is_operational")
-    val isOperational: Boolean
+    val isOperational: Boolean,
+    val title: String,
 )
 
 @Serializable
 data class EVChargerSubmissionStatusType(
     val id: String,
-    val title: String,
     @SerialName("is_live")
-    val isLive: Boolean
+    val isLive: Boolean,
+    val title: String
 )
 
 @Serializable
 data class EVChargerUsageType(
     val id: String,
-    val title: String,
-    @SerialName("is_pay_at_location")
-    val isPayAtLocation: Boolean,
+    @SerialName("is_access_key_required")
+    val isAccessKeyRequired: Boolean,
     @SerialName("is_membership_required")
     val isMembershipRequired: Boolean,
-    @SerialName("is_access_key_required")
-    val isAccessKeyRequired: Boolean
+    @SerialName("is_pay_at_location")
+    val isPayAtLocation: Boolean,
+    val title: String
 )
 
 @Serializable
@@ -197,47 +197,47 @@ data class EVChargersSearchResponse(
 
 @Serializable
 data class EVCharger(
-    val id: String,
+    val address: EVChargerAddress,
+    val connections: List<EVChargerConnection>,
     @SerialName("data_provider_id")
     val dataProviderId: String,
+    val id: String,
     @SerialName("operator_id")
     val operatorId: String,
     @SerialName("usage_type_id")
-    val usageTypeId: String,
-    val address: EVChargerAddress,
-    val connections: List<EVChargerConnection>
+    val usageTypeId: String
 )
 
 @Serializable
 data class EVChargerAddress(
-    val location: EVChargerCoordinates,
-    val title: String,
+    @SerialName("access_comments")
+    val accessComments: String,
     @SerialName("address_line_1")
     val addressLine1: String,
     @SerialName("address_line_2")
     val addressLine2: String,
-    val town: String,
-    @SerialName("state_or_province")
-    val stateOrProvince: String,
-    @SerialName("access_comments")
-    val accessComments: String,
-    val postcode: String,
+    val country: EVChargerCountry,
     @SerialName("country_id")
     val countryId: String,
-    val country: EVChargerCountry
+    val location: EVChargerCoordinates,
+    val postcode: String,
+    @SerialName("state_or_province")
+    val stateOrProvince: String,
+    val title: String,
+    val town: String
 )
 
 @Serializable
 data class EVChargerConnection(
-    @SerialName("connection_type_id")
-    val connectionTypeId: String,
-    val reference: String,
-    val level_id: String,
     val amps: Int,
-    val voltage: Int,
-    val power: Float,
-    val current: String,
     @SerialName("connection_type")
     val connectionType: EVChargerConnectionType,
-    val level: EVChargerType
+    @SerialName("connection_type_id")
+    val connectionTypeId: String,
+    val current: String,
+    val level: EVChargerType,
+    val level_id: String,
+    val power: Float,
+    val reference: String,
+    val voltage: Int
 )

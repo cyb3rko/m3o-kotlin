@@ -7,8 +7,19 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "news"
 
+/**
+ * **Get the latest news**
+ *
+ * Get the latest news headlines from anywhere in the world
+ *
+ * @since 0.1.0
+ */
 object NewsService {
 
+    /**
+     * Get the latest news headlines
+     * @since 0.1.0
+     */
     suspend fun headlines(
         locale: String,
         date: String = "",

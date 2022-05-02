@@ -11,10 +11,10 @@ data class StreamListChannelsResponse(val channels: List<StreamChannel>) {
 
     @Serializable
     data class StreamChannel(
-        val name: String,
         val description: String,
         @SerialName("last_active")
-        val lastActive: String
+        val lastActive: String,
+        val name: String
     )
 }
 
@@ -26,11 +26,11 @@ data class StreamListMessagesResponse(val channel: String, val messages: List<St
 
     @Serializable
     data class StreamMessage(
-        val id: String,
-        val text: String,
-        val timestamp: String,
         val channel: String,
-        val metadata: Map<String, String>
+        val id: String,
+        val metadata: Map<String, String>,
+        val text: String,
+        val timestamp: String
     )
 }
 

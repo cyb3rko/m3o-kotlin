@@ -19,7 +19,7 @@ internal data class ContactsCreateRequest(
 )
 
 @Serializable
-data class ContactsCreateResponse(val contact: ContactsEntry)
+data class ContactsCreateResponse(val contact: Contact)
 
 @Serializable
 internal data class ContactsDeleteRequest(val id: String)
@@ -28,13 +28,13 @@ internal data class ContactsDeleteRequest(val id: String)
 internal data class ContactsListRequest(val limit: Int, val offset: Int)
 
 @Serializable
-data class ContactsListResponse(val contacts: List<ContactsEntry>)
+data class ContactsListResponse(val contacts: List<Contact>)
 
 @Serializable
 internal data class ContactsReadRequest(val id: String)
 
 @Serializable
-data class ContactsReadResponse(val contact: ContactsEntry)
+data class ContactsReadResponse(val contact: Contact)
 
 @Serializable
 internal data class ContactsUpdateRequest(
@@ -51,7 +51,7 @@ internal data class ContactsUpdateRequest(
 )
 
 @Serializable
-data class ContactsUpdateResponse(val contact: ContactsEntry)
+data class ContactsUpdateResponse(val contact: Contact)
 
 // Data (multiple use)
 
@@ -68,7 +68,7 @@ data class ContactsEmail(
 )
 
 @Serializable
-data class ContactsEntry(
+data class Contact(
     val addresses: List<ContactsAddress>,
     val birthday: String,
     @SerialName("created_at")

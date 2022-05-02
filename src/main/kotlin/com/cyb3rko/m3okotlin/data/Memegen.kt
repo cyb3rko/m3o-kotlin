@@ -23,12 +23,12 @@ data class MemegenTemplatesResponse(val templates: List<MemegenTemplatesEntry>) 
 
     @Serializable
     data class MemegenTemplatesEntry(
+        @SerialName("box_count")
+        val boxCount: Int,
+        val height: Int,
         val id: String,
         val name: String,
         val url: String,
-        val width: Int,
-        val height: Int,
-        @SerialName("box_count")
-        val boxCount: Int
+        val width: Int
     )
 }

@@ -26,11 +26,11 @@ data class DNSResponse(
 
     @Serializable
     data class DNSQueryAnswer(
+        val data: String,
         val name: String,
-        val type: Int,
         @SerialName("TTL")
         val ttl: Int,
-        val data: String
+        val type: Int,
     )
 
     @Serializable

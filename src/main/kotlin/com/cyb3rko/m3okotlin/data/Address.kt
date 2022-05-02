@@ -7,23 +7,23 @@ import kotlinx.serialization.Serializable
 internal data class AddressRequest(val postcode: String)
 
 @Serializable
-data class AddressResponse(val addresses: List<Addresses>) {
+data class AddressResponse(val addresses: List<Address>) {
 
     @Serializable
-    data class Addresses(
+    data class Address(
+        @SerialName("building_name")
+        val buildingName: String,
+        val county: String,
         @SerialName("line_one")
         val lineOne: String,
         @SerialName("line_two")
         val lineTwo: String,
-        val summary: String,
+        val locality: String,
         val organisation: String,
-        @SerialName("building_name")
-        val buildingName: String,
+        val postcode: String,
         val premise: String,
         val street: String,
-        val locality: String,
-        val town: String,
-        val county: String,
-        val postcode: String
+        val summary: String,
+        val town: String
     )
 }

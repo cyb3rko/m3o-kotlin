@@ -2,13 +2,25 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O.getUrl
 import com.cyb3rko.m3okotlin.M3O.ktorHttpClient
-import com.cyb3rko.m3okotlin.data.*
+import com.cyb3rko.m3okotlin.data.MoviesRequest
+import com.cyb3rko.m3okotlin.data.MoviesResponse
 import io.ktor.client.request.*
 
 private const val SERVICE = "movie"
 
+/**
+ * **Search for movies**
+ *
+ * Search for movies by IMDb ID or title.
+ *
+ * @since 0.1.0
+ */
 object MoviesService {
 
+    /**
+     * Search for movies by simple text search
+     * @since 0.1.0
+     */
     suspend fun search(
         query: String,
         language: String = "",

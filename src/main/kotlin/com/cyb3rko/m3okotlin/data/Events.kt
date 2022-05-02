@@ -30,10 +30,10 @@ internal data class EventsReadRequest(
 )
 
 @Serializable
-data class EventsReadResponse(val events: List<EventsEntry>) {
+data class EventsReadResponse(val events: List<Event>) {
 
     @Serializable
-    data class EventsEntry(val id: String, val message: EventsMessage)
+    data class Event(val id: String, val message: EventsMessage)
 }
 
 // Data (multiple use)

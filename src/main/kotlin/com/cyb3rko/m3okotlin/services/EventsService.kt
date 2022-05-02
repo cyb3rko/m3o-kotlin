@@ -10,8 +10,21 @@ import kotlinx.serialization.json.Json
 
 private const val SERVICE = "event"
 
+/**
+ * **Event stream processing**
+ *
+ * Publish and consume messages from a scalable persistent event stream. Group
+ * messages by topic and asynchronously notify listeners of new events occuring
+ * in real time. Messages are persisted in case consumers disconnect.
+ *
+ * @since 0.1.0
+ */
 object EventsService {
 
+    /**
+     * Consume events from a given topic.
+     * @since 0.1.0
+     */
     fun consume(
         topic: String,
         group: String = "",
@@ -26,12 +39,20 @@ object EventsService {
         return socket
     }
 
+    /**
+     * Publish a event to the event stream.
+     * @since 0.1.0
+     */
     suspend fun publish(message: EventsMessage, topic: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Publish")) {
             body = EventsPublishRequest(message, topic)
         }
     }
 
+    /**
+     * Read stored events
+     * @since 0.1.0
+     */
     suspend fun read(
         topic: String,
         limit: Int = 0,

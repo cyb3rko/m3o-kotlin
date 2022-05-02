@@ -6,24 +6,52 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "stream"
 
+/**
+ * **Ephemeral message streams**
+ *
+ * The stream service provides ephemeral message streams for building chat
+ * applications, feeds and timelines. Simply send messages to a channel and know
+ * they'll expire after 24 hours. Streams are limited to 1000 messages and 1000
+ * streams in total. Max message size is 512 characters.
+ *
+ * @since 0.1.0
+ */
 object StreamService {
 
+    /**
+     * Create a channel with a given name and description. Channels are created
+     * automatically but this allows you to specify a description that's
+     * persisted for the lifetime of the channel.
+     * @since 0.1.0
+     */
     suspend fun createChannel(description: String, name: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "CreateChannel")) {
             body = StreamCreateChannelRequest(description, name)
         }
     }
 
+    /**
+     * List all the active channels
+     * @since 0.1.0
+     */
     suspend fun listChannels(): StreamListChannelsResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "ListChannels"))
     }
 
+    /**
+     * List messages for a given channel
+     * @since 0.1.0
+     */
     suspend fun listMessages(channel: String, limit: Int = 25): StreamListMessagesResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "ListMessages")) {
             body = StreamListMessagesRequest(channel, limit)
         }
     }
 
+    /**
+     * Send a message to the stream.
+     * @since 0.1.0
+     */
     suspend fun sendMessage(channel: String, text: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "SendMessage")) {
             body = StreamSendMessageRequest(channel, text)

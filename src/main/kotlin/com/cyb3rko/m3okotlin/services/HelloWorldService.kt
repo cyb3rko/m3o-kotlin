@@ -14,17 +14,33 @@ import kotlinx.serialization.json.Json
 
 private const val SERVICE = "helloworld"
 
+/**
+ * **Just saying hello world**
+ *
+ * Helloworld simply returns a personalized message in response to a name. Use
+ * it for testing purposes.
+ *
+ * @since 0.1.0
+ */
 object HelloWorldService {
 
+    /**
+     * Return a personalised Hello message
+     * @since 0.1.0
+     */
     suspend fun call(name: String): HelloWorldCallResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Call")) {
           body = HelloWorldCallRequest(name)
         }
     }
 
+    /**
+     * Stream a personalised Hello message
+     * @since 0.1.0
+     */
     fun stream(name: String, messages: Int = 1, action: (Exception?, HelloWorldStreamResponse?) -> Unit) {
         val url = getUrl(SERVICE, "Stream", true)
-        WebSocket(url, Json.encodeToString(HelloWorldStreamRequest(name, messages))) { e, response ->
+        WebSocket(url, Json.encodeToString(HelloWorldStreamRequest(messages, name))) { e, response ->
             action(e, if (response != null) Json.decodeFromString(response) else null)
         }.connect()
     }

@@ -30,16 +30,16 @@ internal data class FunctionsDeployRequest(
 )
 
 @Serializable
-data class FunctionsDeployResponse(val function: FunctionsFunction)
+data class FunctionsDeployResponse(val function: Function)
 
 @Serializable
 internal data class FunctionsDescribeRequest(val name: String)
 
 @Serializable
-data class FunctionsDescribeResponse(val function: FunctionsFunction)
+data class FunctionsDescribeResponse(val function: Function)
 
 @Serializable
-data class FunctionsListResponse(val functions: List<FunctionsFunction>)
+data class FunctionsListResponse(val functions: List<Function>)
 
 @Serializable
 internal data class FunctionsLogsRequest(
@@ -85,7 +85,7 @@ internal data class FunctionsUpdateRequest(val name: String, val source: String)
 // Data (multiple use)
 
 @Serializable
-data class FunctionsFunction(
+data class Function(
     val branch: String,
     val created: String,
     val entrypoint: String,

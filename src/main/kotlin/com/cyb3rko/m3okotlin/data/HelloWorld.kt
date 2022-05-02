@@ -9,7 +9,7 @@ internal data class HelloWorldCallRequest(val name: String)
 data class HelloWorldCallResponse(val message: String)
 
 @Serializable
-internal data class HelloWorldStreamRequest(val name: String, val messages: Int)
+internal data class HelloWorldStreamRequest(val messages: Int, val name: String)
 
 @Serializable
 data class HelloWorldStreamResponse(val message: String)

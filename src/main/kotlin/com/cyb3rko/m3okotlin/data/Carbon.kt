@@ -5,13 +5,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CarbonResponse(
     val metric: String,
-    val projects: List<Project>,
+    val projects: List<CarbonProject>,
     val tonnes: Float,
     val units: Int
 ) {
 
     @Serializable
-    data class Project(
+    data class CarbonProject(
         val name: String,
         val percentage: Int,
         val tonnes: Float

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class GIFRequest(
+internal data class GIFsRequest(
     val lang: String,
     val limit: Int,
     val offset: Int,
@@ -13,9 +13,9 @@ internal data class GIFRequest(
 )
 
 @Serializable
-data class GIFResponse(
+data class GIFsResponse(
     val data: List<GIF>,
-    val pagination: Pagination
+    val pagination: GIFsPagination
 ) {
 
     @Serializable
@@ -23,7 +23,7 @@ data class GIFResponse(
         @SerialName("embed_url")
         val embedUrl: String,
         val id: String,
-        val images: GIFImages,
+        val images: GIFsImages,
         val rating: String,
         @SerialName("short_url")
         val shortUrl: String,
@@ -34,47 +34,47 @@ data class GIFResponse(
     ) {
 
         @Serializable
-        data class GIFImages(
-            val downsized: GIFImage,
+        data class GIFsImages(
+            val downsized: GIFsImage,
             @SerialName("downsized_large")
-            val downsizedLarge: GIFImage,
+            val downsizedLarge: GIFsImage,
             @SerialName("downsized_medium")
-            val downsizedMedium: GIFImage,
+            val downsizedMedium: GIFsImage,
             @SerialName("downsized_small")
-            val downsizedSmall: GIFImage,
+            val downsizedSmall: GIFsImage,
             @SerialName("downsized_still")
-            val downsizedStill: GIFImage,
+            val downsizedStill: GIFsImage,
             @SerialName("fixed_height")
-            val fixedHeight: GIFImage,
+            val fixedHeight: GIFsImage,
             @SerialName("fixed_height_downsampled")
-            val fixedHeightDownsampled: GIFImage,
+            val fixedHeightDownsampled: GIFsImage,
             @SerialName("fixed_height_small")
-            val fixedHeightSmall: GIFImage,
+            val fixedHeightSmall: GIFsImage,
             @SerialName("fixed_height_small_still")
-            val fixedHeightSmallStill: GIFImage,
+            val fixedHeightSmallStill: GIFsImage,
             @SerialName("fixed_height_still")
-            val fixedHeightStill: GIFImage,
+            val fixedHeightStill: GIFsImage,
             @SerialName("fixed_width")
-            val fixedWidth: GIFImage,
+            val fixedWidth: GIFsImage,
             @SerialName("fixed_width_downsampled")
-            val fixedWidthDownsampled: GIFImage,
+            val fixedWidthDownsampled: GIFsImage,
             @SerialName("fixed_width_small")
-            val fixedWidthSmall: GIFImage,
+            val fixedWidthSmall: GIFsImage,
             @SerialName("fixed_width_small_still")
-            val fixedWidthSmallStill: GIFImage,
+            val fixedWidthSmallStill: GIFsImage,
             @SerialName("fixed_width_still")
-            val fixedWidthStill: GIFImage,
-            val looping: GIFImage,
-            val original: GIFImage,
+            val fixedWidthStill: GIFsImage,
+            val looping: GIFsImage,
+            val original: GIFsImage,
             @SerialName("original_still")
-            val originalStill: GIFImage,
-            val preview: GIFImage,
+            val originalStill: GIFsImage,
+            val preview: GIFsImage,
             @SerialName("preview_gif")
-            val previewGIF: GIFImage,
+            val previewGIF: GIFsImage,
         ) {
 
             @Serializable
-            data class GIFImage(
+            data class GIFsImage(
                 val height: Int,
                 @SerialName("mp4_size")
                 val mp4Size: Int,
@@ -92,7 +92,7 @@ data class GIFResponse(
     }
 
     @Serializable
-    data class Pagination(
+    data class GIFsPagination(
         val count: Int,
         val offset: Int,
         @SerialName("total_count")

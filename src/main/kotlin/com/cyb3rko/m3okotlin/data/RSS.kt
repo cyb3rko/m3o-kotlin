@@ -21,12 +21,12 @@ data class RSSFeedResponse(val entries: List<RSSFeedEntry>) {
 
     @Serializable
     data class RSSFeedEntry(
-        val id: String,
+        val date: String,
         val feed: String,
+        val id: String,
         val link: String,
-        val title: String,
         val summary: String,
-        val date: String
+        val title: String
     )
 }
 
@@ -35,10 +35,10 @@ data class RSSListResponse(val feeds: List<RSSFeed>) {
 
     @Serializable
     data class RSSFeed(
+        val category: String,
         val id: String,
         val name: String,
-        val url: String,
-        val category: String
+        val url: String
     )
 }
 

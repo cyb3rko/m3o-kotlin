@@ -7,20 +7,39 @@ import kotlinx.serialization.json.JsonObject
 
 private const val SERVICE = "function"
 
+/**
+ * **Serverless functions**
+ *
+ * Deploy and run serverless lambda functions with zero infra management
+ *
+ * @since 0.1.0
+ */
 object FunctionsService {
 
+    /**
+     * Call a function by name
+     * @since 0.1.0
+     */
     suspend fun call(name: String, request: JsonObject): FunctionsCallResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Call")) {
             body = FunctionsCallRequest(name, request)
         }
     }
 
+    /**
+     * Delete a function by name
+     * @since 0.1.0
+     */
     suspend fun delete(name: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
             body = FunctionsDeleteRequest(name)
         }
     }
 
+    /**
+     * Deploy a group of functions
+     * @since 0.1.0
+     */
     suspend fun deploy(
         name: String,
         repo: String,
@@ -37,42 +56,74 @@ object FunctionsService {
         }
     }
 
+    /**
+     * Get the info for a deployed function
+     * @since 0.1.0
+     */
     suspend fun describe(name: String): FunctionsDescribeResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Describe")) {
             body = FunctionsDescribeRequest(name)
         }
     }
 
+    /**
+     * List all the deployed functions
+     * @since 0.1.0
+     */
     suspend fun list(): FunctionsListResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "List"))
     }
 
+    /**
+     * Get the logs for a function
+     * @since 0.1.0
+     */
     suspend fun logs(name: String, logsType: String = "build"): FunctionsLogsResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Logs")) {
             body = FunctionsLogsRequest(logsType, name)
         }
     }
 
+    /**
+     * Return the backend url for proxying
+     * @since 0.1.0
+     */
     suspend fun proxy(id: String): FunctionsProxyResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Proxy")) {
             body = FunctionsProxyRequest(id)
         }
     }
 
+    /**
+     * Return a list of supported regions
+     * @since 0.1.0
+     */
     suspend fun regions(): FunctionsRegionsResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Regions"))
     }
 
+    /**
+     * Reserve function names and resources beyond free quota
+     * @since 0.1.0
+     */
     suspend fun reserve(name: String): FunctionsReserveResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Reserve")) {
             body = FunctionsReserveRequest(name)
         }
     }
 
+    /**
+     * Return a list of supported runtimes
+     * @since 0.1.0
+     */
     suspend fun runtimes(): FunctionsRuntimesResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Runtimes"))
     }
 
+    /**
+     * Update a function. Downloads the source, builds and redeploys
+     * @since 0.1.0
+     */
     suspend fun update(name: String, source: String = "") {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Update")) {
             body = FunctionsUpdateRequest(name, source)

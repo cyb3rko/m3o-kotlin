@@ -4,9 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class MinecraftRequest(
-    val address: String
-)
+internal data class MinecraftRequest(val address: String)
 
 @Serializable
 data class MinecraftResponse(

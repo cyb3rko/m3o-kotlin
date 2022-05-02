@@ -7,6 +7,15 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "password"
 
+/**
+ * **Generate strong passwords**
+ *
+ * Generate strong passwords used for signing up to services. Optionally specify
+ * length, whether to include numbers, symbols and upper or lowercase
+ * characters.
+ *
+ * @since 0.1.0
+ */
 object PasswordsService {
 
     suspend fun generate(

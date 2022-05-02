@@ -17,7 +17,7 @@ internal data class PlacesNearbyRequest(
 )
 
 @Serializable
-data class PlacesNearbyResponse(val results: List<PlacesPlace>)
+data class PlacesNearbyResponse(val results: List<Place>)
 
 @Serializable
 internal data class PlacesSearchRequest(
@@ -30,12 +30,12 @@ internal data class PlacesSearchRequest(
 )
 
 @Serializable
-data class PlacesSearchResponse(val results: List<PlacesPlace>)
+data class PlacesSearchResponse(val results: List<Place>)
 
 // Data (multiple use)
 
 @Serializable
-data class PlacesPlace(
+data class Place(
     val address: String,
     @SerialName("icon_url")
     val iconUrl: String,

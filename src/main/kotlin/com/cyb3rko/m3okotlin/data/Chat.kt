@@ -97,26 +97,26 @@ data class ChatSendResponse(val message: ChatMessage)
 
 @Serializable
 data class ChatMessage(
-    val id: String,
     val client: String,
+    val id: String,
     @SerialName("room_id")
     val roomID: String,
-    @SerialName("user_id")
-    val userID: String,
     @SerialName("sent_at")
     val sentAt: String,
     val subject: String,
-    val text: String
+    val text: String,
+    @SerialName("user_id")
+    val userID: String
 )
 
 @Serializable
 data class ChatRoom(
-    val id: String,
-    val name: String,
-    val description: String,
     @SerialName("created_at")
     val createdAt: String,
+    val description: String,
+    val id: String,
+    val name: String,
+    val private: Boolean,
     @SerialName("user_ids")
-    val userIDs: List<String>,
-    val private: Boolean
+    val userIDs: List<String>
 )

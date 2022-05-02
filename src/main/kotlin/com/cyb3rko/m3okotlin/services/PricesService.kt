@@ -6,8 +6,21 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "price"
 
+/**
+ * **Global commodities index**
+ *
+ * Get the price of global commodities like oil, gold, wheat and more. Commodity
+ * prices are updated every 10-15 minutes. Add your own prices for anything not
+ * already indexed.
+ *
+ * @since 0.1.0
+ */
 object PricesService {
 
+    /**
+     * Add a price
+     * @since 0.1.0
+     */
     suspend fun add(
         author: String,
         currency: String,
@@ -21,6 +34,10 @@ object PricesService {
         }
     }
 
+    /**
+     * Get the price of anything
+     * @since 0.1.0
+     */
     suspend fun get(
         currency: String,
         name: String = "",
@@ -31,10 +48,18 @@ object PricesService {
         }
     }
 
+    /**
+     * Get the index for available prices
+     * @since 0.1.0
+     */
     suspend fun index(): PricesIndexResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Index"))
     }
 
+    /**
+     * List prices for a given currency
+     * @since 0.1.0
+     */
     suspend fun list(
         currency: String,
         limit: Int = 0,
@@ -45,6 +70,10 @@ object PricesService {
         }
     }
 
+    /**
+     * Report an invalid price
+     * @since 0.1.0
+     */
     suspend fun report(
         comment: String,
         name: String = "",

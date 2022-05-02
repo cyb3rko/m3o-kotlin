@@ -8,8 +8,20 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "ip"
 
+/**
+ * **IP to geolocation lookup**
+ *
+ * The IP service provides IP to geolocation lookup including asn, city,
+ * country, timezone, and latitude/longitude.
+ *
+ * @since 0.1.0
+ */
 object IPGeolocationService {
 
+    /**
+     * Lookup the geolocation information for an IP address
+     * @since 0.1.0
+     */
     suspend fun lookup(ip: String): IPGeolocationResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Lookup")) {
             body = IPGeolocationRequest(ip)

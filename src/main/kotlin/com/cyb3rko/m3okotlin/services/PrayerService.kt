@@ -7,8 +7,23 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "prayer"
 
+/**
+ * **Islamic prayer times**
+ *
+ * Prayer (salah) times for the religion of Islam. The daily obligatory prayers
+ * collectively form the second of the five pillars in Islam, observed five
+ * times every day at prescribed times. These are Fajr (observed at dawn), Zuhr
+ * prayer (observed at noon), Asr (observed late in the afternoon), Maghrib
+ * (observed at dusk), and Isha (observed after sunset).
+ *
+ * @since 0.1.0
+ */
 object PrayerService {
 
+    /**
+     * Get the prayer (salah) times for a location on a given date
+     * @since 0.1.0
+     */
     suspend fun times(
         date: String = "",
         days: Int = 1,

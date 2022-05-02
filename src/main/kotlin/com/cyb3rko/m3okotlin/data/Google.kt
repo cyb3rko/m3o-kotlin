@@ -11,12 +11,12 @@ data class GoogleResponse(val results: List<GoogleSearchResult>) {
 
     @Serializable
     data class GoogleSearchResult(
+        @SerialName("display_url")
+        val displayUrl: String,
         val id: String,
         val kind: String,
-        val title: String,
         val snippet: String,
-        val url: String,
-        @SerialName("display_url")
-        val displayUrl: String
+        val title: String,
+        val url: String
     )
 }

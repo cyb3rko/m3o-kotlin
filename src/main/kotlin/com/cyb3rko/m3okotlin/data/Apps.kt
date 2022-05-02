@@ -90,5 +90,5 @@ data class AppsService(
     val repo: String,
     val status: String,
     val updated: String,
-    val url: String,
+    val url: String
 )

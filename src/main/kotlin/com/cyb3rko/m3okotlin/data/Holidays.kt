@@ -18,10 +18,10 @@ internal data class HolidaysListRequest(
 )
 
 @Serializable
-data class HolidaysListResponse(val holidays: List<HolidaysEntry>) {
+data class HolidaysListResponse(val holidays: List<Holiday>) {
 
     @Serializable
-    data class HolidaysEntry(
+    data class Holiday(
         @SerialName("country_code")
         val countryCode: String,
         val date: String,

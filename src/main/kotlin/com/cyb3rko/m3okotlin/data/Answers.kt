@@ -8,6 +8,6 @@ internal data class AnswersRequest(val query: String)
 @Serializable
 data class AnswersResponse(
     val answer: String,
-    val url: String,
-    val image: String
+    val image: String,
+    val url: String
 )

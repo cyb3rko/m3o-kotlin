@@ -7,8 +7,20 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "tunnel"
 
+/**
+ * **Tunnel HTTP requests**
+ *
+ * Tunnel HTTP requests anywhere in the world through one endpoint. Build VPNs
+ * or simple pass through proxies to bypass firewalls and restrictions.
+ *
+ * @since 0.1.0
+ */
 object TunnelService {
 
+    /**
+     * Send a request through the tunnel
+     * @since 0.1.0
+     */
     suspend fun send(
         body: String = "",
         headers: Map<String, String> = mapOf(),

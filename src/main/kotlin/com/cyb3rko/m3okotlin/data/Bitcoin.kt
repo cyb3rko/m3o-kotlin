@@ -6,4 +6,4 @@ import kotlinx.serialization.Serializable
 internal data class BitcoinRequest(val symbol: String)
 
 @Serializable
-data class BitcoinResponse(val symbol: String, val price: Float)
+data class BitcoinResponse(val price: Float, val symbol: String)

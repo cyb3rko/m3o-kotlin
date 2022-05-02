@@ -8,8 +8,19 @@ import io.ktor.client.request.*
 
 private const val SERVICE = "vehicle"
 
+/**
+ * **UK vehicle lookup**
+ *
+ * Find a UK vehicle via it's registration number.
+ *
+ * @since 0.1.0
+ */
 object VehicleService {
 
+    /**
+     * Lookup a UK vehicle by it's registration number
+     * @since 0.1.0
+     */
     suspend fun lookup(registration: String): VehicleResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Lookup")) {
             body = VehicleRequest(registration)

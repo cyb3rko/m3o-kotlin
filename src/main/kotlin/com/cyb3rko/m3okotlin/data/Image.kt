@@ -34,9 +34,9 @@ data class ImageResizeRequest(
 
     @Serializable
     data class ImageCropOptions(
-        val height: Int,
-        val width: Int,
         val anchor: String = "center",
+        val height: Int,
+        val width: Int
     )
 }
 

@@ -54,11 +54,11 @@ data class QuranSearchResponse(
     @Serializable
     data class QuranSearchResult(
         val text: String,
+        val translations: List<QuranVerseTranslation>,
         @SerialName("verse_id")
         val verseID: Int,
         @SerialName("verse_key")
-        val verseKey: String,
-        val translations: List<QuranVerseTranslation>
+        val verseKey: String
     )
 }
 

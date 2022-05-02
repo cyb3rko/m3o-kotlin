@@ -13,8 +13,22 @@ import java.io.File
 
 private const val SERVICE = "space"
 
+/**
+ * **Infinite cloud storage**
+ *
+ * Space for simple object storage. Put anything in the cloud forever. Objects
+ * can be public (readable by all via a public URL) or private.
+ *
+ * @since 0.1.0
+ */
 object SpaceService {
 
+    /**
+     * Create an object. Returns error if object with this name already exists.
+     * Max object size of 10MB, see Upload endpoint for larger objects. If you
+     * want to update an existing object use the `Update` endpoint
+     * @since 0.1.0
+     */
     suspend fun create(
         name: String,
         objectBase64: String = "",
@@ -47,36 +61,61 @@ object SpaceService {
         } else throw InvalidParameterException("No object found, \"objectBase64\" and \"objectFile\" are empty.")
     }
 
+    /**
+     * Delete an object from space
+     * @since 0.1.0
+     */
     suspend fun delete(name: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
             body = SpaceDeleteRequest(name)
         }
     }
 
+    /**
+     * Download an object via a presigned url
+     * @since 0.1.0
+     */
     suspend fun download(name: String): SpaceDownloadResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Download")) {
             body = SpaceDownloadRequest(name)
         }
     }
 
+    /**
+     * Retrieve meta information about an object
+     * @since 0.1.0
+     */
     suspend fun head(name: String): SpaceHeadResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Head")) {
             body = SpaceHeadRequest(name)
         }
     }
 
+    /**
+     * List the objects in space
+     * @since 0.1.0
+     */
     suspend fun list(prefix: String = ""): SpaceListResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "List")) {
             body = SpaceListRequest(prefix)
         }
     }
 
+    /**
+     * Read an object in space
+     * @since 0.1.0
+     */
     suspend fun read(name: String): SpaceReadResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Read")) {
             body = SpaceReadRequest(name)
         }
     }
 
+    /**
+     * Update an object. If an object with this name does not exist, creates a
+     * new one.
+     * @since 0.1.0
+     */
     suspend fun update(
         name: String,
         objectBase64: String = "",
@@ -109,6 +148,11 @@ object SpaceService {
         } else throw InvalidParameterException("No object found, \"objectBase64\" and \"objectFile\" are empty.")
     }
 
+    /**
+     * Upload a large object (> 10MB). Returns a time limited presigned URL to
+     * be used for uploading the object
+     * @since 0.1.0
+     */
     suspend fun upload(name: String, visibility: String = "private"): SpaceUploadResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Upload")) {
             body = SpaceUploadRequest(name, visibility)
