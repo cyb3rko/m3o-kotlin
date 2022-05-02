@@ -89,4 +89,16 @@ object CommentsService {
             body = CommentsUpdateRequest(comment)
         }
     }
+
+    suspend fun Comment.delete() = delete(this.id)
+
+    fun Comment.events(
+        action: (Exception?, CommentsEventsResponse?) -> Unit
+    ) = events(this.id, action)
+
+    suspend fun Comment.read() = read(this.id)
+
+    suspend fun Comment.update(subject: String, text: String) = update(
+        CommentsUpdate(this.id, subject, text)
+    )
 }
