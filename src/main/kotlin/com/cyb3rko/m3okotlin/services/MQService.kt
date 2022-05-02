@@ -39,10 +39,19 @@ object MQService {
      * Subscribe to messages for a given topic.
      * @since 0.1.0
      */
-    fun subscribe(topic: String, action: (Exception?, MQSubscribeResponse?) -> Unit): WebSocket {
+    fun subscribe(
+        topic: String,
+        action: (Exception?, MQSubscribeResponse?) -> Unit
+    ): WebSocket {
         val url = M3O.getUrl(SERVICE, "Subscribe", true)
-        val socket = WebSocket(url, Json.encodeToString(MQSubscribeRequest(topic))) { e, response ->
-            action(e, if (response != null) Json.decodeFromString(response) else null)
+        val socket = WebSocket(
+            url,
+            Json.encodeToString(MQSubscribeRequest(topic))
+        ) { e, response ->
+            action(
+                e,
+                if (response != null) Json.decodeFromString(response) else null
+            )
         }
         socket.connect()
         return socket

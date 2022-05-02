@@ -44,10 +44,19 @@ object CommentsService {
      * Subscribe to comments events
      * @since 0.1.0
      */
-    fun events(id: String = "", action: (Exception?, CommentsEventsResponse?) -> Unit): WebSocket {
+    fun events(
+        id: String = "",
+        action: (Exception?, CommentsEventsResponse?) -> Unit
+    ): WebSocket {
         val url = M3O.getUrl(SERVICE, "Events", true)
-        val socket = WebSocket(url, Json.encodeToString(CommentsEventsRequest(id))) { e, response ->
-            action(e, if (response != null) Json.decodeFromString(response) else null)
+        val socket = WebSocket(
+            url,
+            Json.encodeToString(CommentsEventsRequest(id))
+        ) { e, response ->
+            action(
+                e,
+                if (response != null) Json.decodeFromString(response) else null
+            )
         }
         socket.connect()
         return socket

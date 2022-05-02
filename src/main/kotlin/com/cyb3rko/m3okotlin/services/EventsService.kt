@@ -32,8 +32,14 @@ object EventsService {
         action: (Exception?, EventsConsumeResponse?) -> Unit
     ): WebSocket {
         val url = M3O.getUrl(SERVICE, "Consume", true)
-        val socket = WebSocket(url, Json.encodeToString(EventsConsumeRequest(group, offset, topic))) { e, response ->
-            action(e, if (response != null) Json.decodeFromString(response) else null)
+        val socket = WebSocket(
+            url,
+            Json.encodeToString(EventsConsumeRequest(group, offset, topic))
+        ) { e, response ->
+            action(
+                e,
+                if (response != null) Json.decodeFromString(response) else null
+            )
         }
         socket.connect()
         return socket

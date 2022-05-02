@@ -38,10 +38,22 @@ object HelloWorldService {
      * Stream a personalised Hello message
      * @since 0.1.0
      */
-    fun stream(name: String, messages: Int = 1, action: (Exception?, HelloWorldStreamResponse?) -> Unit) {
+    fun stream(
+        name: String,
+        messages: Int = 1,
+        action: (Exception?, HelloWorldStreamResponse?) -> Unit
+    ): WebSocket {
         val url = getUrl(SERVICE, "Stream", true)
-        WebSocket(url, Json.encodeToString(HelloWorldStreamRequest(messages, name))) { e, response ->
-            action(e, if (response != null) Json.decodeFromString(response) else null)
-        }.connect()
+        val socket = WebSocket(
+            url,
+            Json.encodeToString(HelloWorldStreamRequest(messages, name))
+        ) { e, response ->
+            action(
+                e,
+                if (response != null) Json.decodeFromString(response) else null
+            )
+        }
+        socket.connect()
+        return socket
     }
 }

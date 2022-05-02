@@ -44,10 +44,19 @@ object ListsService {
      * Subscribe to lists events
      * @since 0.1.0
      */
-    fun events(id: String = "", action: (Exception?, ListsEventsResponse?) -> Unit): WebSocket {
+    fun events(
+        id: String = "",
+        action: (Exception?, ListsEventsResponse?) -> Unit
+    ): WebSocket {
         val url = M3O.getUrl(SERVICE, "Events", true)
-        val socket = WebSocket(url, Json.encodeToString(ListsEventsRequest(id))) { e, response ->
-            action(e, if (response != null) Json.decodeFromString(response) else null)
+        val socket = WebSocket(
+            url,
+            Json.encodeToString(ListsEventsRequest(id))
+        ) { e, response ->
+            action(
+                e,
+                if (response != null) Json.decodeFromString(response) else null
+            )
         }
         socket.connect()
         return socket
