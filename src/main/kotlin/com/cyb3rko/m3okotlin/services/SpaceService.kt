@@ -158,4 +158,30 @@ object SpaceService {
             body = SpaceUploadRequest(name, visibility)
         }
     }
+
+    suspend fun SpaceObject.delete() = delete(this.name)
+
+    suspend fun SpaceObject.download() = download(this.name)
+
+    suspend fun SpaceObject.update(
+        objectBase64: String = "",
+        objectFile: File? = null,
+        visibility: String = "private"
+    ) = update(this.name, objectBase64, objectFile, visibility)
+
+    suspend fun SpaceObject.upload(visibility: String = "private") = upload(this.name, visibility)
+
+    suspend fun SpaceObjectMetaData.delete() = delete(this.name)
+
+    suspend fun SpaceObjectMetaData.download() = download(this.name)
+
+    suspend fun SpaceObjectMetaData.read() = read(this.name)
+
+    suspend fun SpaceObjectMetaData.update(
+        objectBase64: String = "",
+        objectFile: File? = null,
+        visibility: String = "private"
+    ) = update(this.name, objectBase64, objectFile, visibility)
+
+    suspend fun SpaceObjectMetaData.upload(visibility: String = "private") = upload(this.name, visibility)
 }
