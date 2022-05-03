@@ -56,6 +56,18 @@ object M3O {
         Log.i("Ktor M3O Client initialized.")
     }
 
+    fun terminate() {
+        if (::ktorHttpClient.isInitialized) {
+            ktorHttpClient.close()
+        }
+        if (::ktorHttpMultipartClient.isInitialized) {
+            ktorHttpMultipartClient.close()
+        }
+
+        Log.i("Ktor M3O Client terminated.")
+        Log.terminate()
+    }
+
     internal fun getKtorHttpMultipartClient(): HttpClient {
         if (!::ktorHttpMultipartClient.isInitialized) {
             ktorHttpMultipartClient = HttpClient {
