@@ -121,12 +121,12 @@ object SpaceService {
         objectBase64: String = "",
         objectFile: File? = null,
         visibility: String = "private"
-    ): SpaceCreateResponse {
+    ): SpaceUpdateResponse {
         val endpointURL = M3O.getUrl(SERVICE, "Update")
 
         if (objectBase64 != "") {
             return M3O.ktorHttpClient.post(endpointURL) {
-                body = SpaceCreateRequest(name, objectBase64, visibility)
+                body = SpaceUpdateRequest(name, objectBase64, visibility)
             }
         } else if (objectFile != null) {
             val response = M3O.getKtorHttpMultipartClient().post<String>(endpointURL) {
