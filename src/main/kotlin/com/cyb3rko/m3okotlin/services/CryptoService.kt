@@ -2,6 +2,7 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.*
+import com.cyb3rko.m3okotlin.data.CryptoSymbolsResponse.CryptoSymbol
 import io.ktor.client.request.*
 
 private const val SERVICE = "crypto"
@@ -63,4 +64,12 @@ object CryptoService {
     suspend fun symbols(): CryptoSymbolsResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Symbols"))
     }
+
+    suspend fun CryptoSymbol.history() = history(this.symbol)
+
+    suspend fun CryptoSymbol.news() = news(this.symbol)
+
+    suspend fun CryptoSymbol.price() = price(this.symbol)
+
+    suspend fun CryptoSymbol.quote() = quote(this.symbol)
 }
