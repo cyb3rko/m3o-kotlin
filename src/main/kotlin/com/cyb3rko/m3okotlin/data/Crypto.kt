@@ -57,8 +57,8 @@ data class CryptoQuoteResponse(
 )
 
 @Serializable
-data class CryptoSymbolsResponse(val symbols: List<CryptoSymbolsEntry>) {
+data class CryptoSymbolsResponse(val symbols: List<CryptoSymbol>) {
 
     @Serializable
-    data class CryptoSymbolsEntry(val name: String, val symbol: String)
+    data class CryptoSymbol(val name: String, val symbol: String)
 }
