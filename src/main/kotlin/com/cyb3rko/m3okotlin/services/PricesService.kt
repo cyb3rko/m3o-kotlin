@@ -83,4 +83,24 @@ object PricesService {
             body = PricesReportRequest(comment, name, symbol)
         }
     }
+
+    suspend fun PricesValue.add(
+        author: String,
+        price: Double,
+        source: String
+    ) = add(author, this.currency, this.name, price, source, this.symbol)
+
+    suspend fun PricesValue.get(currency: String) = get(currency, this.name, this.symbol)
+
+    suspend fun PricesValue.report(comment: String) = report(comment, this.name, this.symbol)
+
+    suspend fun PricesIndex.add(
+        author: String,
+        price: Double,
+        source: String
+    ) = add(author, this.currency, this.name, price, source, this.symbol)
+
+    suspend fun PricesIndex.get(currency: String) = get(currency, this.name, this.symbol)
+
+    suspend fun PricesIndex.report(comment: String) = report(comment, this.name, this.symbol)
 }
