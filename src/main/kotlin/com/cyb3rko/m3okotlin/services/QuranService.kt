@@ -2,6 +2,7 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.*
+import com.cyb3rko.m3okotlin.data.QuranChaptersResponse.QuranChapter
 import io.ktor.client.request.*
 
 private const val SERVICE = "quran"
@@ -70,4 +71,14 @@ object QuranService {
             body = QuranVersesRequest(chapter, language, limit, page, translate, words)
         }
     }
+
+    suspend fun QuranChapter.summary() = summary(this.id)
+
+    suspend fun QuranChapter.verses(
+        language: String = "en",
+        limit: Int = 10,
+        page: Int = 1,
+        translate: Boolean = false,
+        words: Boolean = false
+    ) = verses(this.id, language, limit, page, translate, words)
 }
