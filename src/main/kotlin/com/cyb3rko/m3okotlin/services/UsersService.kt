@@ -157,7 +157,7 @@ object UsersService {
         fromName: String,
         subject: String,
         textContent: String,
-        expiration: Int = 1800,
+        expiration: Int = 1800
     ) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "SendPasswordResetEmail")) {
             body = UsersSendPasswordResetEmailRequest(email, expiration, fromName, subject, textContent)
@@ -189,7 +189,7 @@ object UsersService {
         id: String,
         email: String = "",
         profile: Map<String, String> = mapOf(),
-        username: String = "",
+        username: String = ""
     ) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Update")) {
             body = UsersUpdateRequest(email, id, profile, username)
@@ -233,4 +233,55 @@ object UsersService {
             body = UsersVerifyTokenRequest(token)
         }
     }
+
+    suspend fun UsersAccount.delete() = delete(this.id)
+
+    suspend fun UsersAccount.login(password: String) = login(password, this.email, this.username)
+
+    suspend fun UsersAccount.logoutAll() = logoutAll(this.id)
+
+    suspend fun UsersAccount.resetPassword(
+        code: String,
+        password: String,
+        newPassword: String
+    ) = resetPassword(code, password, this.email, newPassword)
+
+    suspend fun UsersAccount.sendMagicLink(
+        address: String,
+        endpoint: String,
+        fromName: String,
+        subject: String,
+        textContent: String
+    ) = sendMagicLink(address, this.email, endpoint, fromName, subject, textContent)
+
+    suspend fun UsersAccount.sendPasswordResetEmail(
+        fromName: String,
+        subject: String,
+        textContent: String,
+        expiration: Int = 1800
+    ) = sendPasswordResetEmail(this.email, fromName, subject, textContent, expiration)
+
+    suspend fun UsersAccount.sendVerificationEmail(
+        failureRedirectURL: String,
+        fromName: String,
+        redirectURL: String,
+        subject: String,
+        textContent: String
+    ) = sendVerificationEmail(this.email, failureRedirectURL, fromName, redirectURL, subject, textContent)
+
+    suspend fun UsersAccount.update(
+        email: String = "",
+        profile: Map<String, String> = mapOf(),
+        username: String = ""
+    ) = update(this.id, email, profile, username)
+
+    suspend fun UsersAccount.updatePassword(
+        confirmPassword: String,
+        newPassword: String,
+        oldPassword: String
+    ) = updatePassword(confirmPassword, newPassword, oldPassword, this.id)
+
+    suspend fun UsersAccount.verifyEmail(token: String) = verifyEmail(this.email, token)
+
+    suspend fun UsersSession.logout() = logout(this.id)
 }
