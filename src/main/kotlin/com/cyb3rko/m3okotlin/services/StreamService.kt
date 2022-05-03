@@ -2,6 +2,7 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.*
+import com.cyb3rko.m3okotlin.data.StreamListChannelsResponse.StreamChannel
 import io.ktor.client.request.*
 
 private const val SERVICE = "stream"
@@ -57,4 +58,8 @@ object StreamService {
             body = StreamSendMessageRequest(channel, text)
         }
     }
+
+    suspend fun StreamChannel.listMessages(limit: Int = 25) = listMessages(this.name, limit)
+
+    suspend fun StreamChannel.sendMessage(text: String) = sendMessage(this.name, text)
 }
