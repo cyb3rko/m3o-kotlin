@@ -2,6 +2,7 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.*
+import com.cyb3rko.m3okotlin.data.CurrencyCodesResponse.CurrencyCode
 import io.ktor.client.request.*
 
 private const val SERVICE = "currency"
@@ -58,4 +59,10 @@ object CurrencyService {
             body = CurrencyRatesRequest(code)
         }
     }
+
+    suspend fun CurrencyCode.convert(amount: Float, to: String) = convert(amount, this.name, to)
+
+    suspend fun CurrencyCode.history(date: String) = history(this.name, date)
+
+    suspend fun CurrencyCode.rates() = rates(this.name)
 }
