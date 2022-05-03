@@ -128,10 +128,31 @@ object ChatService {
         roomID: String,
         subject: String,
         text: String,
-        userID: String,
+        userID: String
     ): ChatSendResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Send")) {
             body = ChatSendRequest(client, roomID, subject, text, userID)
         }
     }
+
+    suspend fun ChatRoom.delete() = delete(this.id)
+
+    suspend fun ChatRoom.history() = history(this.id)
+
+    suspend fun ChatRoom.invite(userID: String) = invite(this.id, userID)
+
+    fun ChatRoom.join(userID: String, action: (Exception?, ChatJoinResponse?) -> Unit) = join(
+        this.id, userID, action
+    )
+
+    suspend fun ChatRoom.kick(userID: String) = kick(this.id, userID)
+
+    suspend fun ChatRoom.leave(userID: String) = leave(this.id, userID)
+
+    suspend fun ChatRoom.send(
+        client: String,
+        subject: String,
+        text: String,
+        userID: String
+    ) = send(client, this.id, subject, text, userID)
 }
