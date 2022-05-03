@@ -57,4 +57,8 @@ object FilesService {
             body = FilesSaveRequest(file, public)
         }
     }
+
+    suspend fun File.delete() = delete(this.path, this.project)
+
+    suspend fun File.read() = read(this.path, this.project)
 }
