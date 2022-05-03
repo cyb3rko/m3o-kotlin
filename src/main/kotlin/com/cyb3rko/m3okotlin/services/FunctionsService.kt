@@ -2,6 +2,8 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.*
+import com.cyb3rko.m3okotlin.data.Function
+import com.cyb3rko.m3okotlin.data.FunctionsReserveResponse.FunctionsReservation
 import io.ktor.client.request.*
 import kotlinx.serialization.json.JsonObject
 
@@ -129,4 +131,25 @@ object FunctionsService {
             body = FunctionsUpdateRequest(name, source)
         }
     }
+
+    suspend fun Function.call(request: JsonObject) = call(this.name, request)
+
+    suspend fun Function.delete() = delete(this.name)
+
+    suspend fun Function.logs(logsType: String = "build") = logs(this.name, logsType)
+
+    suspend fun Function.proxy() = proxy(this.name)
+
+    suspend fun Function.update(source: String = "") = update(this.name, source)
+
+    suspend fun FunctionsReservation.deploy(
+        repo: String,
+        runtime: String,
+        branch: String = "master",
+        entrypoint: String = name,
+        envVars: JsonObject = JsonObject(mapOf()),
+        region: String = "europe-west1",
+        source: String = "",
+        subfolder: String = ""
+    ) = deploy(this.name, repo, runtime, branch, entrypoint, envVars, region, source, subfolder)
 }
