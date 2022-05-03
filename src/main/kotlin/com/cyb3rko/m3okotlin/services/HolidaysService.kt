@@ -2,6 +2,7 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.HolidaysCountriesResponse
+import com.cyb3rko.m3okotlin.data.HolidaysCountriesResponse.HolidaysCountry
 import com.cyb3rko.m3okotlin.data.HolidaysListRequest
 import com.cyb3rko.m3okotlin.data.HolidaysListResponse
 import io.ktor.client.request.*
@@ -35,4 +36,6 @@ object HolidaysService {
             body = HolidaysListRequest(countryCode, year)
         }
     }
+
+    suspend fun HolidaysCountry.list(year: Int) = list(this.code, year)
 }
