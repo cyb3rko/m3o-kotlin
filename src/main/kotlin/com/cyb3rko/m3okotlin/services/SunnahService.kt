@@ -2,6 +2,8 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.*
+import com.cyb3rko.m3okotlin.data.SunnahBooksResponse.SunnahBook
+import com.cyb3rko.m3okotlin.data.SunnahCollectionsResponse.SunnahCollection
 import io.ktor.client.request.*
 
 private const val SERVICE = "sunnah"
@@ -77,4 +79,30 @@ object SunnahService {
             body = SunnahHadithsRequest(book, collection, limit, page)
         }
     }
+
+    suspend fun SunnahBook.chapters(
+        collection: String,
+        limit: Int = 0,
+        page: Int = 0
+    ) = chapters(this.id, collection, limit, page)
+
+    suspend fun SunnahBook.hadiths(
+        collection: String,
+        limit: Int = 0,
+        page: Int = 0
+    ) = hadiths(this.id, collection, limit, page)
+
+    suspend fun SunnahCollection.books(limit: Int = 0, page: Int = 0) = books(this.name, limit, page)
+
+    suspend fun SunnahCollection.chapters(
+        book: Int,
+        limit: Int = 0,
+        page: Int = 0
+    ) = chapters(book, this.name, limit, page)
+
+    suspend fun SunnahCollection.hadiths(
+        book: Int,
+        limit: Int = 0,
+        page: Int = 0
+    ) = hadiths(book, this.name, limit, page)
 }
