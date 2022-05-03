@@ -51,4 +51,6 @@ object LocationService {
             body = LocationSearchRequest(center, numEntities, radius, type)
         }
     }
+
+    suspend fun Location.read() = read(this.id)
 }
