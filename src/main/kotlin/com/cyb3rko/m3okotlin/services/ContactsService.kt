@@ -83,4 +83,17 @@ object ContactsService {
             body = ContactsUpdateRequest(addresses, birthday, emails, id, links, name, note, phones, socialMedias)
         }
     }
+
+    suspend fun Contact.delete() = delete(this.id)
+
+    suspend fun Contact.update(
+        name: String,
+        addresses: List<ContactsAddress> = listOf(),
+        birthday: String = "",
+        emails: List<ContactsEmail> = listOf(),
+        links: List<ContactsLink> = listOf(),
+        note: String = "",
+        phones: List<ContactsPhone> = listOf(),
+        socialMedias: List<ContactsSocialMedia> = listOf()
+    ) = update(this.id, name, addresses, birthday, emails, links, note, phones, socialMedias)
 }
