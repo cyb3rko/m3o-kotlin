@@ -60,4 +60,15 @@ object NFTsService {
             body = NFTsCollectionsRequest(limit, offset)
         }
     }
+
+    suspend fun NFTsAsset.collection() = collection(this.collection.slug)
+
+    suspend fun NFTsCollection.assets(
+        cursor: String = "",
+        limit: Int = 0,
+        order: String = "",
+        orderBy: String = ""
+    ) = assets(this.slug, cursor, limit, order, orderBy)
+
+    suspend fun NFTsContract.asset(tokenID: String) = asset(this.address, tokenID)
 }
