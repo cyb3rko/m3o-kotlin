@@ -89,4 +89,15 @@ object ListsService {
             body = ListsUpdateRequest(list)
         }
     }
+
+    suspend fun ListsList.delete() = delete(this.id)
+
+    fun ListsList.events(action: (Exception?, ListsEventsResponse?) -> Unit) = events(
+        this.id,
+        action
+    )
+
+    suspend fun ListsList.update(items: List<String>, name: String) = update(
+        ListsUpdate(this.id, items, name)
+    )
 }
