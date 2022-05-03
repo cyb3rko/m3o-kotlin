@@ -2,6 +2,8 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.*
+import com.cyb3rko.m3okotlin.data.TwitterTrendsResponse.TwitterTrend
+import com.cyb3rko.m3okotlin.data.TwitterUserResponse.TwitterProfile
 import io.ktor.client.request.*
 
 private const val SERVICE = "twitter"
@@ -53,4 +55,12 @@ object TwitterService {
             body = TwitterUserRequest(username)
         }
     }
+
+    suspend fun Tweet.timeline(limit: Int = 20) = timeline(this.username, limit)
+
+    suspend fun Tweet.user() = user(this.username)
+
+    suspend fun TwitterProfile.timeline(limit: Int = 20) = timeline(this.username, limit)
+
+    suspend fun TwitterTrend.search(limit: Int = 20) = search(this.name, limit)
 }
