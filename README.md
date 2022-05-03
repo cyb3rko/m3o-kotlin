@@ -16,6 +16,8 @@ This is the handcrafted Kotlin client to access APIs on the M3O Platform.
     - [Initializing](#initializing)
     - [Calling Endpoints](#calling-endpoints)
     - [Examples](#examples)
+- [Extension Functions](#extension-functions)
+- [Supported APIs](#supported-apis)
 
 ## What is M3O
 
@@ -117,3 +119,128 @@ fun main() {
     }
 }
 ```
+
+## Extension Functions
+
+In addition to calling methods on the service objects there are extension functions for some of the many data classes.  
+They simplify method calls by calling API functions on data classes.
+
+Check for their availability in the [table below](#supported-apis).
+
+---
+
+**Example**:  
+Log a user in and out again (without extension function)
+
+```kotlin
+val mySession = UsersService.login("myPassword", "myEmail").session
+UsersService.logout(mySession.id)
+```
+
+(with extension function)
+
+```kotlin
+val mySession = UsersService.login("myPassword", "myEmail").session
+mySession.logout()       <-- extension function
+```
+
+---
+
+**Another Example**:  
+Join a chat room and leave again (without extension function)
+
+```kotlin
+val userID = "1234"
+val chatRoom = ChatService.list(userID).rooms[0]
+ChatService.join(chatRoom.id, userID) { error, response ->
+    println(response)
+}
+ChatService.leave(chatRoom.id, userID)
+```
+
+(with extension function)
+
+```kotlin
+val userID = "1234"
+val chatRoom = ChatService.list(userID).rooms[0]
+chatRoom.join(userID) { error, response ->        <-- extension function
+    println(response)
+}
+chatRoom.leave(userID)       <-- extension function
+```
+
+## Supported APIs
+
+Below all supported APIs:
+
+| ID | Service | [Extension Functions](#extension-functions) |
+|---|---|---|
+| 1 | Address | :x: |
+| 2 | Analytics | :white_check_mark: |
+| 3 | Answers | :x: |
+| 4 | Apps | :white_check_mark: |
+| 5 | Avatar | :x: |
+| 6 | Bitcoin | :x: |
+| 7 | Cache | :x: |
+| 8 | Carbon | :x: |
+| 9 | Chat | :white_check_mark: |
+| 10 | Comments | :white_check_mark: |
+| 11 | Contacts | :white_check_mark: |
+| 12 | Crypto | :white_check_mark: |
+| 13 | Currency | :white_check_mark: |
+| 14 | DB | :x: |
+| 15 | DNS | :x: |
+| 16 | Email | :x: |
+| 17 | Emoji | :x: |
+| 18 | EV Chargers | :x: |
+| 19 | Events | :x: |
+| 20 | Files | :white_check_mark: |
+| 21 | Forex | :x: |
+| 22 | Functions | :white_check_mark: |
+| 23 | Geocoding | :x: |
+| 24 | GIFs | :x: |
+| 25 | Google | :x: |
+| 26 | Hello World | :x: |
+| 27 | Holidays | :white_check_mark: |
+| 28 | ID | :x: |
+| 29 | Image | :x: |
+| 30 | IP Geolocation | :x: |
+| 31 | Jokes | :x: |
+| 32 | Lists | :white_check_mark: |
+| 33 | Location | :white_check_mark: |
+| 34 | Memegen | :white_check_mark: |
+| 35 | Minecraft | :x: |
+| 36 | Movies | :x: |
+| 37 | MQ | :x: |
+| 38 | News | :x: |
+| 39 | NFTs | :white_check_mark: |
+| 40 | Notes | :white_check_mark: |
+| 41 | OTP | :x: |
+| 42 | Passwords | :x: |
+| 43 | Ping | :x: |
+| 44 | Places |  |
+| 45 | Postcode | :x: |
+| 46 | Prayer | :x: |
+| 47 | Prices | :white_check_mark: |
+| 48 | QR Codes | :x: |
+| 49 | Quran | :white_check_mark: |
+| 50 | Routing | :x: |
+| 51 | RSS | :white_check_mark: |
+| 52 | Search | :x: |
+| 53 | Sentiment | :x: |
+| 54 | SMS | :x: |
+| 55 | Space | :white_check_mark: |
+| 56 | Spam | :x: |
+| 57 | Stocks | :x: |
+| 58 | Stream | :white_check_mark: |
+| 59 | Sunnah | :white_check_mark: |
+| 60 | Thumbnail | :x: |
+| 61 | Time | :x: |
+| 62 | Translate | :x: |
+| 63 | Tunnel | :x: |
+| 64 | Twitter | :white_check_mark: |
+| 65 | URLs | :x: |
+| 66 | Users | :white_check_mark: |
+| 67 | Vehicle | :x: |
+| 68 | Weather | :x: |
+| 69 | YouTube | :white_check_mark: |
