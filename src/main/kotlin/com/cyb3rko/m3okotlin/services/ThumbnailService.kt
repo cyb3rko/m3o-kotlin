@@ -21,7 +21,11 @@ object ThumbnailService {
      * Create a thumbnail screenshot by passing in a url, height and width
      * @since 0.1.0
      */
-    suspend fun screenshot(url: String, height: Int = 0, width: Int = 0): ThumbnailResponse {
+    suspend fun screenshot(
+        url: String,
+        height: Int = 0,
+        width: Int = 0)
+    : ThumbnailResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "LookupPostcode")) {
             body = ThumbnailRequest(height, url, width)
         }
