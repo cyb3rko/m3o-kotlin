@@ -89,4 +89,15 @@ object NotesService {
             body = NotesUpdateRequest(note)
         }
     }
+
+    suspend fun Note.delete() = delete(this.id)
+
+    fun Note.events(action: (Exception?, NotesEventsResponse?) -> Unit) = events(
+        this.id,
+        action
+    )
+
+    suspend fun Note.read() = read(this.id)
+
+    suspend fun Note.update(text: String, title: String) = update(NotesUpdate(this.id, text, title))
 }
