@@ -8,7 +8,7 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 
 def getVersionName = { ->
-    return "0.2.0"
+    return "0.2.1"
 }
 
 def getArtificatId = { ->
@@ -39,7 +39,7 @@ publishing {
 }
 
 group 'com.cyb3rko'
-version '0.2.0'
+version '0.2.1'
 
 repositories {
     mavenCentral()
