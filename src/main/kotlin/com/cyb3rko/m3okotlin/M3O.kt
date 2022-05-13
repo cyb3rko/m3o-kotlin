@@ -6,6 +6,7 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import kotlinx.coroutines.isActive
 
 object M3O {
     private const val BASE_URL = "https://api.m3o.com/v1"
@@ -66,6 +67,12 @@ object M3O {
 
         Log.i("Ktor M3O Client terminated.")
         Log.terminate()
+    }
+
+    fun isInitialized(): Boolean {
+        return if (::ktorHttpClient.isInitialized) {
+            ktorHttpClient.engine.isActive
+        } else false
     }
 
     internal fun getKtorHttpMultipartClient(): HttpClient {
