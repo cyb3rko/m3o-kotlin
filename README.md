@@ -13,7 +13,7 @@ This is the handcrafted Kotlin client to access APIs on the M3O Platform.
 - [What is M3O](#what-is-m3o)
 - [Usage](#usage)
     - [Import](#import)
-    - [Initializing](#initializing)
+    - [Initialization / Termination](#initialization--terminating)
     - [Calling Endpoints](#calling-endpoints)
     - [Examples](#examples)
 - [Extension Functions](#extension-functions)
@@ -56,7 +56,7 @@ or
 implementation 'io.ktor:ktor-client-android:1.6.8'
 ```
 
-### Initializing
+### Initialization / Terminating
 
 Before accessing any API endpoint you have to initialize the library with your M3O API token (if you are missing your token, create one [HERE](https://m3o.com/account/keys)):
 
@@ -66,6 +66,22 @@ M3O.initialize("M3O_API_TOKEN")
 
 *Tip for Android development*:  
 To hide your API token in your app I recommend using the [Hidden Secrets Gradle Plugin](https://github.com/klaxit/hidden-secrets-gradle-plugin).
+
+---
+
+To check if the library is already initialized you can do
+
+```kotlin
+M3O.isInitialized()
+```
+
+and call
+
+```kotlin
+M3O.terminate()
+```
+
+to terminate M3O clients and save resources.
 
 ### Calling endpoints
 
