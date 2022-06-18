@@ -7,8 +7,8 @@ internal data class IPGeolocationRequest(val ip: String)
 
 @Serializable
 data class IPGeolocationResponse(
-    val asn: Int,
-    val city: String,
+    val asn: Int? = null,
+    val city: String? = null,
     val continent: String,
     val country: String,
     val ip: String,
