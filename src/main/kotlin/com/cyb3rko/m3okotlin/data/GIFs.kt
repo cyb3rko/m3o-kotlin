@@ -14,8 +14,8 @@ internal data class GIFsRequest(
 
 @Serializable
 data class GIFsResponse(
-    val data: List<GIF>,
-    val pagination: GIFsPagination
+    val data: List<GIF>? = null,
+    val pagination: GIFsPagination? = null
 ) {
 
     @Serializable
