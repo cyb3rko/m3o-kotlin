@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode")
+
 package com.cyb3rko.m3okotlin
 
 import io.ktor.client.*
@@ -14,6 +16,7 @@ object M3O {
     internal lateinit var authorization: Pair<String, String>
     internal lateinit var ktorHttpClient: HttpClient
     private lateinit var ktorHttpMultipartClient: HttpClient
+    private lateinit var ktorHttpRedirectClient: HttpClient
 
     fun initialize(apiKey: String) {
         Log.initialize()
@@ -26,9 +29,6 @@ object M3O {
         authorization = "Authorization" to "Bearer $apiKey"
 
         ktorHttpClient = HttpClient {
-            followRedirects = true
-            expectSuccess = false
-
             install(JsonFeature) {
                 serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
                     prettyPrint = true
@@ -64,6 +64,9 @@ object M3O {
         if (::ktorHttpMultipartClient.isInitialized) {
             ktorHttpMultipartClient.close()
         }
+        if (::ktorHttpRedirectClient.isInitialized) {
+            ktorHttpRedirectClient.close()
+        }
 
         Log.i("Ktor M3O Client terminated.")
         Log.terminate()
@@ -97,6 +100,41 @@ object M3O {
             Log.i("Ktor M3O Multipart Client initialized.")
         }
         return ktorHttpMultipartClient
+    }
+
+    internal fun getKtorHttpRedirectClient(): HttpClient {
+        if (!::ktorHttpRedirectClient.isInitialized) {
+            ktorHttpRedirectClient = HttpClient {
+                followRedirects = true
+                expectSuccess = false
+
+                install(JsonFeature) {
+                    serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                        prettyPrint = true
+                        ignoreUnknownKeys = true
+                    })
+                }
+
+                install(DefaultRequest) {
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    header(HttpHeaders.Authorization, authorization.second)
+                }
+
+                // Logging for debugging
+
+//            install(Logging) {
+//                logger = object : Logger {
+//                    override fun log(message: String) {
+//                        Log.i("Logger Ktor => $message")
+//                    }
+//
+//                }
+//                level = LogLevel.ALL
+//            }
+            }
+            Log.i("Ktor M3O Redirect Client initialized.")
+        }
+        return ktorHttpRedirectClient
     }
 
     fun getUrl(service: String, endpoint: String, stream: Boolean = false): String {

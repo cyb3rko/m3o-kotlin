@@ -76,7 +76,7 @@ object SpaceService {
      * @since 0.1.0
      */
     suspend fun download(name: String): SpaceDownloadResponse {
-        return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Download")) {
+        return M3O.getKtorHttpRedirectClient().post(M3O.getUrl(SERVICE, "Download")) {
             body = SpaceDownloadRequest(name)
         }
     }
