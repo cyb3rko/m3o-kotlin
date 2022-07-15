@@ -259,4 +259,5 @@ Below all supported APIs:
 | 66 | Users | :white_check_mark: |
 | 67 | Vehicle | :x: |
 | 68 | Weather | :x: |
-| 69 | YouTube | :white_check_mark: |
+| 69 | Wordle | :x: |
+| 70 | YouTube | :white_check_mark: |
