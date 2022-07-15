@@ -17,6 +17,16 @@ private const val SERVICE = "url"
 object URLsService {
 
     /**
+     * Delete a URL
+     * @since 0.2.2
+     */
+    suspend fun delete(shortURL: String) {
+        return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
+            body = URLsDeleteRequest(shortURL)
+        }
+    }
+
+    /**
      * List all the shortened URLs
      * @since 0.1.0
      */

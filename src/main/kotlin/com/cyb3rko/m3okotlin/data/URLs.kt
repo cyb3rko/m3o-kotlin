@@ -3,6 +3,9 @@ package com.cyb3rko.m3okotlin.data
 import kotlinx.serialization.Serializable
 
 @Serializable
+internal data class URLsDeleteRequest(val shortURL: String)
+
+@Serializable
 internal data class URLsListRequest(val shortURL: String)
 
 @Serializable
