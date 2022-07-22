@@ -9,9 +9,9 @@ import io.ktor.client.request.*
 private const val SERVICE = "bitcoin"
 
 /**
- * **Realtime Bitcoin price**
+ * **Bitcoin price and info**
  *
- * Get the price of bitcoin in real time. Price is updated every 5 mins.
+ * Get the price, balance or transaction history of bitcoin in real time.
  *
  * @since 0.1.0
  */
