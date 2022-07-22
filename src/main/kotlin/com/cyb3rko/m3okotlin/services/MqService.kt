@@ -2,10 +2,10 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.WebSocket
-import com.cyb3rko.m3okotlin.data.MQMessage
-import com.cyb3rko.m3okotlin.data.MQPublishRequest
-import com.cyb3rko.m3okotlin.data.MQSubscribeRequest
-import com.cyb3rko.m3okotlin.data.MQSubscribeResponse
+import com.cyb3rko.m3okotlin.data.MqMessage
+import com.cyb3rko.m3okotlin.data.MqPublishRequest
+import com.cyb3rko.m3okotlin.data.MqSubscribeRequest
+import com.cyb3rko.m3okotlin.data.MqSubscribeResponse
 import io.ktor.client.request.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -22,16 +22,16 @@ private const val SERVICE = "mq"
  *
  * @since 0.1.0
  */
-object MQService {
+object MqService {
 
     /**
      * Publish a message. Specify a topic to group messages for a specific
      * topic.
      * @since 0.1.0
      */
-    suspend fun publish(message: MQMessage, topic: String) {
+    suspend fun publish(message: MqMessage, topic: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Publish")) {
-            body = MQPublishRequest(message, topic)
+            body = MqPublishRequest(message, topic)
         }
     }
 
@@ -41,12 +41,12 @@ object MQService {
      */
     fun subscribe(
         topic: String,
-        action: (Exception?, MQSubscribeResponse?) -> Unit
+        action: (Exception?, MqSubscribeResponse?) -> Unit
     ): WebSocket {
         val url = M3O.getUrl(SERVICE, "Subscribe", true)
         val socket = WebSocket(
             url,
-            Json.encodeToString(MQSubscribeRequest(topic))
+            Json.encodeToString(MqSubscribeRequest(topic))
         ) { e, response ->
             action(
                 e,

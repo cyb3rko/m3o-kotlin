@@ -14,15 +14,15 @@ private const val SERVICE = "url"
  *
  * @since 0.1.0
  */
-object URLsService {
+object UrlsService {
 
     /**
      * Create a URL
      * @since 0.2.3
      */
-    suspend fun create(destinationUrl: String, id: String): URLsCreateResponse {
+    suspend fun create(destinationUrl: String, id: String): UrlsCreateResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Create")) {
-            body = URLsCreateRequest(destinationUrl, id)
+            body = UrlsCreateRequest(destinationUrl, id)
         }
     }
 
@@ -30,9 +30,9 @@ object URLsService {
      * Delete a URL
      * @since 0.2.2
      */
-    suspend fun delete(id: String = "", shortURL: String = "") {
+    suspend fun delete(id: String = "", shortUrl: String = "") {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
-            body = URLsDeleteRequest(id, shortURL)
+            body = UrlsDeleteRequest(id, shortUrl)
         }
     }
 
@@ -40,9 +40,9 @@ object URLsService {
      * List all the shortened URLs
      * @since 0.1.0
      */
-    suspend fun list(shortURL: String = ""): URLsListResponse {
+    suspend fun list(shortUrl: String = ""): UrlsListResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "List")) {
-            body = URLsListRequest(shortURL)
+            body = UrlsListRequest(shortUrl)
         }
     }
 
@@ -50,9 +50,9 @@ object URLsService {
      * Resolve returns the destination URL of a short URL.
      * @since 0.2.3
      */
-    suspend fun resolve(shortUrl: String): URLsResolveResponse {
+    suspend fun resolve(shortUrl: String): UrlsResolveResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Resolve")) {
-            body = URLsResolveRequest(shortUrl)
+            body = UrlsResolveRequest(shortUrl)
         }
     }
 
@@ -60,9 +60,9 @@ object URLsService {
      * Shorten a long URL
      * @since 0.1.0
      */
-    suspend fun shorten(destinationURL: String): URLsShortenResponse {
+    suspend fun shorten(destinationUrl: String): UrlsShortenResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Shorten")) {
-            body = URLsShortenRequest(destinationURL)
+            body = UrlsShortenRequest(destinationUrl)
         }
     }
 }

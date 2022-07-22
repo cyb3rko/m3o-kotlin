@@ -2,8 +2,8 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O.getUrl
 import com.cyb3rko.m3okotlin.M3O.ktorHttpClient
-import com.cyb3rko.m3okotlin.data.GIFsRequest
-import com.cyb3rko.m3okotlin.data.GIFsResponse
+import com.cyb3rko.m3okotlin.data.GifsRequest
+import com.cyb3rko.m3okotlin.data.GifsResponse
 import io.ktor.client.request.*
 
 private const val SERVICE = "gifs"
@@ -28,9 +28,9 @@ object GIFsService {
         offset: Int = 0,
         lang: String = "",
         rating: String = "g"
-    ): GIFsResponse {
+    ): GifsResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Search")) {
-            body = GIFsRequest(lang, limit, offset, query, rating)
+            body = GifsRequest(lang, limit, offset, query, rating)
         }
     }
 }

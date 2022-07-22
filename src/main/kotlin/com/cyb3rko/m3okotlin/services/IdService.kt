@@ -2,9 +2,9 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O.getUrl
 import com.cyb3rko.m3okotlin.M3O.ktorHttpClient
-import com.cyb3rko.m3okotlin.data.IDGenerateRequest
-import com.cyb3rko.m3okotlin.data.IDGenerateResponse
-import com.cyb3rko.m3okotlin.data.IDTypesResponse
+import com.cyb3rko.m3okotlin.data.IdGenerateRequest
+import com.cyb3rko.m3okotlin.data.IdGenerateResponse
+import com.cyb3rko.m3okotlin.data.IdTypesResponse
 import io.ktor.client.request.*
 
 private const val SERVICE = "id"
@@ -17,15 +17,15 @@ private const val SERVICE = "id"
  *
  * @since 0.1.0
  */
-object IDService {
+object IdService {
 
     /**
      * Generate a unique ID. Defaults to uuid.
      * @since 0.1.0
      */
-    suspend fun generate(type: String = "uuid"): IDGenerateResponse {
+    suspend fun generate(type: String = "uuid"): IdGenerateResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Generate")) {
-            body = IDGenerateRequest(type)
+            body = IdGenerateRequest(type)
         }
     }
 
@@ -33,7 +33,7 @@ object IDService {
      * List the types of IDs available. No query params needed.
      * @since 0.1.0
      */
-    suspend fun types(): IDTypesResponse {
+    suspend fun types(): IdTypesResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Types"))
     }
 }

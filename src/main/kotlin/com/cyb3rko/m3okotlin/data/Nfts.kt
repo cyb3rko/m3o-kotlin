@@ -10,18 +10,18 @@ import kotlinx.serialization.serializer
 // Requests & Responses + Data (single use)
 
 @Serializable
-internal data class NFTsAssetRequest(
+internal data class NftsAssetRequest(
     @SerialName("contract_address")
     val contractAddress: String,
     @SerialName("token_id")
-    val tokenID: String
+    val tokenId: String
 )
 
 @Serializable
-data class NFTsAssetResponse(val asset: NFTsAsset)
+data class NftsAssetResponse(val asset: NftsAsset)
 
 @Serializable
-internal data class NFTsAssetsRequest(
+internal data class NftsAssetsRequest(
     val collection: String,
     val cursor: String,
     val limit: Int,
@@ -31,59 +31,59 @@ internal data class NFTsAssetsRequest(
 )
 
 @Serializable
-data class NFTsAssetsResponse(
-    val assets: List<NFTsAsset>,
+data class NftsAssetsResponse(
+    val assets: List<NftsAsset>,
     val next: String,
     val previous: String
 )
 
 @Serializable
-internal data class NFTsCollectionRequest(val slug: String)
+internal data class NftsCollectionRequest(val slug: String)
 
 @Serializable
-data class NFTsCollectionResponse(val collection: NFTsCollection)
+data class NftsCollectionResponse(val collection: NftsCollection)
 
 @Serializable
-internal data class NFTsCollectionsRequest(val limit: Int, val offset: Int)
+internal data class NftsCollectionsRequest(val limit: Int, val offset: Int)
 
 @Serializable
-data class NFTsCollectionsResponse(val collections: List<NFTsCollection>)
+data class NftsCollectionsResponse(val collections: List<NftsCollection>)
 
 // Data (multiple use)
 
 @Serializable
-data class NFTsAccount(
+data class NftsAccount(
     val address: String,
     @SerialName("profile_url")
-    val profileURL: String,
+    val profileUrl: String,
     val username: String
 )
 
 @Serializable
-data class NFTsAsset(
-    val collection: NFTsCollection,
-    val contract: NFTsContract,
-    val creator: NFTsAccount,
+data class NftsAsset(
+    val collection: NftsCollection,
+    val contract: NftsContract,
+    val creator: NftsAccount,
     val description: String,
     val id: Int,
     @SerialName("image_url")
-    val imageURL: String,
+    val imageUrl: String,
     @SerialName("last_sale")
-    val lastSale: NFTsSale,
+    val lastSale: NftsSale,
     @SerialName("listing_date")
     val listingDate: String,
     val name: String,
-    val owner: NFTsAccount,
+    val owner: NftsAccount,
     val permalink: String,
     val presale: Boolean,
     val sales: Int,
     @SerialName("token_id")
-    val tokenID: String,
-    val traits: List<NFTsAssetTrait>
+    val tokenId: String,
+    val traits: List<NftsAssetTrait>
 )
 
 @Serializable
-data class NFTsAssetTrait(
+data class NftsAssetTrait(
     @SerialName("display_type")
     val displayType: String? = null,
     @SerialName("max_value")
@@ -93,11 +93,11 @@ data class NFTsAssetTrait(
     val traitCount: Int,
     @SerialName("trait_type")
     val traitType: String,
-    @Serializable(with = NFTsAssetTraitValueSerializer::class)
+    @Serializable(with = NftsAssetTraitValueSerializer::class)
     val value: String
 ) {
 
-    private object NFTsAssetTraitValueSerializer: JsonTransformingSerializer<String>(serializer<String>()) {
+    private object NftsAssetTraitValueSerializer: JsonTransformingSerializer<String>(serializer<String>()) {
         override fun transformDeserialize(element: JsonElement): JsonElement {
             return JsonPrimitive(element.toString())
         }
@@ -105,9 +105,9 @@ data class NFTsAssetTrait(
 }
 
 @Serializable
-data class NFTsCollection(
+data class NftsCollection(
     @SerialName("banner_image_url")
-    val bannerImageURL: String,
+    val bannerImageUrl: String,
     @SerialName("created_at")
     val createdAt: String,
     val description: String,
@@ -115,25 +115,25 @@ data class NFTsCollection(
     @SerialName("external_link")
     val externalLink: String,
     @SerialName("image_url")
-    val imageURL: String,
+    val imageUrl: String,
     val name: String,
     @SerialName("payment_tokens")
-    val paymentTokens: List<NFTsPaymentToken>,
+    val paymentTokens: List<NftsPaymentToken>,
     @SerialName("payout_address")
     val payoutAddress: String,
     @SerialName("primary_asset_contracts")
-    val primaryAssetContracts: List<NFTsContract>,
+    val primaryAssetContracts: List<NftsContract>,
     @SerialName("safelist_request_status")
     val safelistRequestStatus: String,
     @SerialName("seller_fees")
     val sellerFees: String,
     val slug: String,
-    val stats: NFTsCollectionStats,
+    val stats: NftsCollectionStats,
     val traits: Map<String, Map<String, Float>>
 )
 
 @Serializable
-data class NFTsContract(
+data class NftsContract(
     val address: String,
     @SerialName("created_at")
     val createdAt: String,
@@ -150,14 +150,14 @@ data class NFTsContract(
 )
 
 @Serializable
-data class NFTsPaymentToken(
+data class NftsPaymentToken(
     val address: String,
     val decimals: Int,
     @SerialName("eth_price")
     val ethPrice: String,
     val id: Int,
     @SerialName("image_url")
-    val imageURL: String,
+    val imageUrl: String,
     val name: String,
     val symbol: String,
     @SerialName("usd_price")
@@ -165,11 +165,11 @@ data class NFTsPaymentToken(
 )
 
 @Serializable
-data class NFTsSale(
+data class NftsSale(
     @SerialName("asset_decimals")
     val assetDecimals: Int,
     @SerialName("asset_token_id")
-    val assetTokenID: String,
+    val assetTokenId: String,
     @SerialName("created_at")
     val createdAt: String,
     @SerialName("event_timestamp")
@@ -177,15 +177,15 @@ data class NFTsSale(
     @SerialName("event_type")
     val eventType: String,
     @SerialName("payment_token")
-    val paymentToken: NFTsPaymentToken? = null,
+    val paymentToken: NftsPaymentToken? = null,
     val quantity: String,
     @SerialName("total_price")
     val totalPrice: String,
-    val transaction: NFTsTransaction? = null
+    val transaction: NftsTransaction? = null
 )
 
 @Serializable
-data class NFTsCollectionStats(
+data class NftsCollectionStats(
     @SerialName("average_price")
     val averagePrice: Double? = null,
     val count: Int? = null,
@@ -230,17 +230,17 @@ data class NFTsCollectionStats(
 )
 
 @Serializable
-data class NFTsTransaction(
+data class NftsTransaction(
     @SerialName("block_hash")
     val blockHash: String,
     @SerialName("block_number")
     val blockNumber: String,
     @SerialName("from_account")
-    val fromAccount: NFTsAccount,
+    val fromAccount: NftsAccount,
     val id: Int,
     val timestamp: String,
     @SerialName("to_account")
-    val toAccount: NFTsAccount,
+    val toAccount: NftsAccount,
     @SerialName("transaction_hash")
     val transactionHash: String,
     @SerialName("transaction_index")

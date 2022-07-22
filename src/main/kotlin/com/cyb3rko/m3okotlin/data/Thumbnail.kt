@@ -1,5 +1,6 @@
 package com.cyb3rko.m3okotlin.data
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,4 +11,4 @@ internal data class ThumbnailRequest(
 )
 
 @Serializable
-data class ThumbnailResponse(val imageURL: String)
+data class ThumbnailResponse(@SerialName("imageURL") val imageUrl: String)

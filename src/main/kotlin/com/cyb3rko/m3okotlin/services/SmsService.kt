@@ -1,8 +1,8 @@
 package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
-import com.cyb3rko.m3okotlin.data.SMSRequest
-import com.cyb3rko.m3okotlin.data.SMSResponse
+import com.cyb3rko.m3okotlin.data.SmsRequest
+import com.cyb3rko.m3okotlin.data.SmsResponse
 import io.ktor.client.request.*
 
 private const val SERVICE = "sms"
@@ -15,15 +15,15 @@ private const val SERVICE = "sms"
  *
  * @since 0.1.0
  */
-object SMSService {
+object SmsService {
 
     /**
      * Send an SMS.
      * @since 0.1.0
      */
-    suspend fun send(from: String, message: String, to: String): SMSResponse {
+    suspend fun send(from: String, message: String, to: String): SmsResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Send")) {
-            body = SMSRequest(from, message, to)
+            body = SmsRequest(from, message, to)
         }
     }
 }

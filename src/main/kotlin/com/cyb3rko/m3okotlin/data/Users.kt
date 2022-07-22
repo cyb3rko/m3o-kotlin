@@ -37,10 +37,10 @@ internal data class UsersLoginRequest(
 data class UsersLoginResponse(val session: UsersSession)
 
 @Serializable
-internal data class UsersLogoutRequest(@SerialName("session_id") val sessionID: String)
+internal data class UsersLogoutRequest(@SerialName("session_id") val sessionId: String)
 
 @Serializable
-internal data class UsersLogoutAllRequest(@SerialName("user_id") val userID: String)
+internal data class UsersLogoutAllRequest(@SerialName("user_id") val userId: String)
 
 @Serializable
 internal data class UsersReadRequest(
@@ -53,7 +53,7 @@ internal data class UsersReadRequest(
 data class UsersReadResponse(val account: UsersAccount)
 
 @Serializable
-internal data class UsersReadSessionRequest(@SerialName("session_id") val sessionID: String)
+internal data class UsersReadSessionRequest(@SerialName("session_id") val sessionId: String)
 
 @Serializable
 data class UsersReadSessionResponse(val session: UsersSession)
@@ -95,11 +95,11 @@ internal data class UsersSendPasswordResetEmailRequest(
 internal data class UsersSendVerificationEmailRequest(
     val email: String,
     @SerialName("failure_redirect_url")
-    val failureRedirectURL: String,
+    val failureRedirectUrl: String,
     @SerialName("from_name")
     val fromName: String,
     @SerialName("redirect_url")
-    val redirectURL: String,
+    val redirectUrl: String,
     val subject: String,
     @SerialName("text_content")
     val textContent: String
@@ -122,7 +122,7 @@ internal data class UsersUpdatePasswordRequest(
     @SerialName("old_password")
     val oldPassword: String,
     @SerialName("userId")
-    val userID: String
+    val userId: String
 )
 
 @Serializable
@@ -160,5 +160,5 @@ data class UsersSession(
     val expires: String,
     val id: String,
     @SerialName("userId")
-    val userID: String
+    val userId: String
 )

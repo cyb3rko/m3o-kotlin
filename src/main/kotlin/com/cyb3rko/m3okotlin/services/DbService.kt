@@ -17,15 +17,15 @@ private const val SERVICE = "db"
  *
  * @since 0.1.0
  */
-object DBService {
+object DbService {
 
     /**
      * Count records in a table
      * @since 0.1.0
      */
-    suspend fun count(table: String = "default"): DBCountResponse {
+    suspend fun count(table: String = "default"): DbCountResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Count")) {
-            body = DBCountRequest(table)
+            body = DbCountRequest(table)
         }
     }
 
@@ -38,9 +38,9 @@ object DBService {
         record: JsonObject,
         id: String = "",
         table: String = "default"
-    ): DBCreateResponse {
+    ): DbCreateResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Create")) {
-            body = DBCreateRequest(id, record, table)
+            body = DbCreateRequest(id, record, table)
         }
     }
 
@@ -50,7 +50,7 @@ object DBService {
      */
     suspend fun delete(id: String, table: String = "default") {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
-            body = DBDeleteRequest(id, table)
+            body = DbDeleteRequest(id, table)
         }
     }
 
@@ -60,7 +60,7 @@ object DBService {
      */
     suspend fun dropTable(table: String = "default") {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "DropTable")) {
-            body = DBDropTableRequest(table)
+            body = DbDropTableRequest(table)
         }
     }
 
@@ -68,7 +68,7 @@ object DBService {
      * List tables in the DB
      * @since 0.1.0
      */
-    suspend fun listTables(): DBListTablesResponse {
+    suspend fun listTables(): DbListTablesResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "ListTables"))
     }
 
@@ -85,9 +85,9 @@ object DBService {
         orderBy: String = "",
         query: String = "",
         table: String = "default"
-    ): DBReadResponse {
+    ): DbReadResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Read")) {
-            body = DBReadRequest(id, limit, offset, order, orderBy, query, table)
+            body = DbReadRequest(id, limit, offset, order, orderBy, query, table)
         }
     }
 
@@ -97,7 +97,7 @@ object DBService {
      */
     suspend fun renameTable(from: String, to: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "RenameTable")) {
-            body = DBRenameTableRequest(from, to)
+            body = DbRenameTableRequest(from, to)
         }
     }
 
@@ -107,7 +107,7 @@ object DBService {
      */
     suspend fun truncate(table: String = "default") {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Truncate")) {
-            body = DBTruncateRequest(table)
+            body = DbTruncateRequest(table)
         }
     }
 
@@ -121,7 +121,7 @@ object DBService {
         table: String = "default"
     ) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Update")) {
-            body = DBUpdateRequest(id, record, table)
+            body = DbUpdateRequest(id, record, table)
         }
     }
 }

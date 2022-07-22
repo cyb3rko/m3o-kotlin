@@ -73,9 +73,9 @@ object UsersService {
      * Logout a user account
      * @since 0.1.0
      */
-    suspend fun logout(sessionID: String) {
+    suspend fun logout(sessionId: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Logout")) {
-            body = UsersLogoutRequest(sessionID)
+            body = UsersLogoutRequest(sessionId)
         }
     }
 
@@ -83,9 +83,9 @@ object UsersService {
      * Logout of all user's sessions
      * @since 0.1.0
      */
-    suspend fun logoutAll(userID: String) {
+    suspend fun logoutAll(userId: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "LogoutAll")) {
-            body = UsersLogoutAllRequest(userID)
+            body = UsersLogoutAllRequest(userId)
         }
     }
 
@@ -108,9 +108,9 @@ object UsersService {
      * found and error is returned.
      * @since 0.1.0
      */
-    suspend fun readSession(sessionID: String): UsersReadSessionResponse {
+    suspend fun readSession(sessionId: String): UsersReadSessionResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "ReadSession")) {
-            body = UsersReadSessionRequest(sessionID)
+            body = UsersReadSessionRequest(sessionId)
         }
     }
 
@@ -170,14 +170,14 @@ object UsersService {
      */
     suspend fun sendVerificationEmail(
         email: String,
-        failureRedirectURL: String,
+        failureRedirectUrl: String,
         fromName: String,
-        redirectURL: String,
+        redirectUrl: String,
         subject: String,
         textContent: String
     ) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "SendVerificationEmail")) {
-            body = UsersSendVerificationEmailRequest(email, failureRedirectURL, fromName, redirectURL, subject, textContent)
+            body = UsersSendVerificationEmailRequest(email, failureRedirectUrl, fromName, redirectUrl, subject, textContent)
         }
     }
 
@@ -204,10 +204,10 @@ object UsersService {
         confirmPassword: String,
         newPassword: String,
         oldPassword: String,
-        userID: String
+        userId: String
     ) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "UpdatePassword")) {
-            body = UsersUpdatePasswordRequest(confirmPassword, newPassword, oldPassword, userID)
+            body = UsersUpdatePasswordRequest(confirmPassword, newPassword, oldPassword, userId)
         }
     }
 
@@ -262,12 +262,12 @@ object UsersService {
     ) = sendPasswordResetEmail(this.email, fromName, subject, textContent, expiration)
 
     suspend fun UsersAccount.sendVerificationEmail(
-        failureRedirectURL: String,
+        failureRedirectUrl: String,
         fromName: String,
-        redirectURL: String,
+        redirectUrl: String,
         subject: String,
         textContent: String
-    ) = sendVerificationEmail(this.email, failureRedirectURL, fromName, redirectURL, subject, textContent)
+    ) = sendVerificationEmail(this.email, failureRedirectUrl, fromName, redirectUrl, subject, textContent)
 
     suspend fun UsersAccount.update(
         email: String = "",

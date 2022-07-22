@@ -2,10 +2,10 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O.getUrl
 import com.cyb3rko.m3okotlin.M3O.ktorHttpClient
-import com.cyb3rko.m3okotlin.data.OTPGenerateRequest
-import com.cyb3rko.m3okotlin.data.OTPGenerateResponse
-import com.cyb3rko.m3okotlin.data.OTPValidateRequest
-import com.cyb3rko.m3okotlin.data.OTPValidateResponse
+import com.cyb3rko.m3okotlin.data.OtpGenerateRequest
+import com.cyb3rko.m3okotlin.data.OtpGenerateResponse
+import com.cyb3rko.m3okotlin.data.OtpValidateRequest
+import com.cyb3rko.m3okotlin.data.OtpValidateResponse
 import io.ktor.client.request.*
 
 private const val SERVICE = "otp"
@@ -18,7 +18,7 @@ private const val SERVICE = "otp"
  *
  * @since 0.1.0
  */
-object OTPService {
+object OtpService {
 
     /**
      * Generate an OTP (one time pass) code
@@ -28,9 +28,9 @@ object OTPService {
         id: String,
         size: Int = 6,
         expiry: Int = 60
-    ): OTPGenerateResponse {
+    ): OtpGenerateResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Generate")) {
-          body = OTPGenerateRequest(expiry, id, size)
+          body = OtpGenerateRequest(expiry, id, size)
         }
     }
 
@@ -38,9 +38,9 @@ object OTPService {
      * Validate the OTP code
      * @since 0.1.0
      */
-    suspend fun validate(id: String, code: String): OTPValidateResponse {
+    suspend fun validate(id: String, code: String): OtpValidateResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Validate")) {
-            body = OTPValidateRequest(code, id)
+            body = OtpValidateRequest(code, id)
         }
     }
 }

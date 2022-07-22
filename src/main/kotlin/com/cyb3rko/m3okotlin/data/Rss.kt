@@ -3,24 +3,24 @@ package com.cyb3rko.m3okotlin.data
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class RSSAddRequest(
+internal data class RssAddRequest(
     val category: String,
     val name: String,
     val url: String
 )
 
 @Serializable
-internal data class RSSFeedRequest(
+internal data class RssFeedRequest(
     val limit: Int,
     val name: String,
     val offset: Int
 )
 
 @Serializable
-data class RSSFeedResponse(val entries: List<RSSFeedEntry>) {
+data class RssFeedResponse(val entries: List<RssFeedEntry>) {
 
     @Serializable
-    data class RSSFeedEntry(
+    data class RssFeedEntry(
         val date: String,
         val feed: String,
         val id: String,
@@ -31,10 +31,10 @@ data class RSSFeedResponse(val entries: List<RSSFeedEntry>) {
 }
 
 @Serializable
-data class RSSListResponse(val feeds: List<RSSFeed>) {
+data class RssListResponse(val feeds: List<RssFeed>) {
 
     @Serializable
-    data class RSSFeed(
+    data class RssFeed(
         val category: String,
         val id: String,
         val name: String,
@@ -43,4 +43,4 @@ data class RSSListResponse(val feeds: List<RSSFeed>) {
 }
 
 @Serializable
-internal data class RSSRemoveRequest(val name: String)
+internal data class RssRemoveRequest(val name: String)

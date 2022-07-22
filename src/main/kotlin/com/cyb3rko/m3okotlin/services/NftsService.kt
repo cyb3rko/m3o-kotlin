@@ -13,15 +13,15 @@ private const val SERVICE = "nft"
  *
  * @since 0.1.0
  */
-object NFTsService {
+object NftsService {
 
     /**
      * Get a single asset by the contract
      * @since 0.1.0
      */
-    suspend fun asset(contractAddress: String, tokenID: String): NFTsAssetResponse {
+    suspend fun asset(contractAddress: String, tokenID: String): NftsAssetResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Asset")) {
-            body = NFTsAssetRequest(contractAddress, tokenID)
+            body = NftsAssetRequest(contractAddress, tokenID)
         }
     }
 
@@ -35,9 +35,9 @@ object NFTsService {
         limit: Int = 0,
         order: String = "",
         orderBy: String = ""
-    ): NFTsAssetsResponse {
+    ): NftsAssetsResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Assets")) {
-            body = NFTsAssetsRequest(collection, cursor, limit, order, orderBy)
+            body = NftsAssetsRequest(collection, cursor, limit, order, orderBy)
         }
     }
 
@@ -45,9 +45,9 @@ object NFTsService {
      * Get a collection by its slug
      * @since 0.1.0
      */
-    suspend fun collection(slug: String): NFTsCollectionResponse {
+    suspend fun collection(slug: String): NftsCollectionResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Collection")) {
-            body = NFTsCollectionRequest(slug)
+            body = NftsCollectionRequest(slug)
         }
     }
 
@@ -55,20 +55,20 @@ object NFTsService {
      * Get a list of collections
      * @since 0.1.0
      */
-    suspend fun collections(limit: Int = 0, offset: Int = 0): NFTsCollectionsResponse {
+    suspend fun collections(limit: Int = 0, offset: Int = 0): NftsCollectionsResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Collections")) {
-            body = NFTsCollectionsRequest(limit, offset)
+            body = NftsCollectionsRequest(limit, offset)
         }
     }
 
-    suspend fun NFTsAsset.collection() = collection(this.collection.slug)
+    suspend fun NftsAsset.collection() = collection(this.collection.slug)
 
-    suspend fun NFTsCollection.assets(
+    suspend fun NftsCollection.assets(
         cursor: String = "",
         limit: Int = 0,
         order: String = "",
         orderBy: String = ""
     ) = assets(this.slug, cursor, limit, order, orderBy)
 
-    suspend fun NFTsContract.asset(tokenID: String) = asset(this.address, tokenID)
+    suspend fun NftsContract.asset(tokenID: String) = asset(this.address, tokenID)
 }

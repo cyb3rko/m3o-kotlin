@@ -4,17 +4,17 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class DNSRequest(val name: String, val type: String)
+internal data class DnsRequest(val name: String, val type: String)
 
 @Serializable
-data class DNSResponse(
+data class DnsResponse(
     @SerialName("AD")
     val ad: Boolean,
-    val answer: List<DNSQueryAnswer>,
+    val answer: List<DnsQueryAnswer>,
     @SerialName("CD")
     val cd: Boolean,
     val provider: String,
-    val question: List<DNSQueryQuestion>,
+    val question: List<DnsQueryQuestion>,
     @SerialName("RA")
     val ra: Boolean,
     @SerialName("RD")
@@ -25,7 +25,7 @@ data class DNSResponse(
 ) {
 
     @Serializable
-    data class DNSQueryAnswer(
+    data class DnsQueryAnswer(
         val data: String,
         val name: String,
         @SerialName("TTL")
@@ -34,5 +34,5 @@ data class DNSResponse(
     )
 
     @Serializable
-    data class DNSQueryQuestion(val name: String, val type: Int)
+    data class DnsQueryQuestion(val name: String, val type: Int)
 }

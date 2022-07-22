@@ -2,8 +2,8 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O.getUrl
 import com.cyb3rko.m3okotlin.M3O.ktorHttpClient
-import com.cyb3rko.m3okotlin.data.QRCodesRequest
-import com.cyb3rko.m3okotlin.data.QRCodesResponse
+import com.cyb3rko.m3okotlin.data.QrCodesRequest
+import com.cyb3rko.m3okotlin.data.QrCodesResponse
 import io.ktor.client.request.*
 
 private const val SERVICE = "qr"
@@ -17,15 +17,15 @@ private const val SERVICE = "qr"
  *
  * @since 0.1.0
  */
-object QRCodesService {
+object QrCodesService {
 
     /**
      * Generate a QR code with a specific text and size
      * @since 0.1.0
      */
-    suspend fun generate(text: String, size: Int = 256): QRCodesResponse {
+    suspend fun generate(text: String, size: Int = 256): QrCodesResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Generate")) {
-            body = QRCodesRequest(size, text)
+            body = QrCodesRequest(size, text)
         }
     }
 }

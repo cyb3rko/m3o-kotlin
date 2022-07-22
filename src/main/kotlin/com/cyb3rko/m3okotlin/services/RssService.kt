@@ -2,7 +2,7 @@ package com.cyb3rko.m3okotlin.services
 
 import com.cyb3rko.m3okotlin.M3O
 import com.cyb3rko.m3okotlin.data.*
-import com.cyb3rko.m3okotlin.data.RSSListResponse.RSSFeed
+import com.cyb3rko.m3okotlin.data.RssListResponse.RssFeed
 import io.ktor.client.request.*
 
 private const val SERVICE = "rss"
@@ -15,7 +15,7 @@ private const val SERVICE = "rss"
  *
  * @since 0.1.0
  */
-object RSSService {
+object RssService {
 
     /**
      * Add a new RSS feed with a name, url, and category
@@ -27,7 +27,7 @@ object RSSService {
         category: String = ""
     ) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Add")) {
-            body = RSSAddRequest(category, name, url)
+            body = RssAddRequest(category, name, url)
         }
     }
 
@@ -40,9 +40,9 @@ object RSSService {
         name: String,
         limit: Int = 25,
         offset: Int = 0
-    ): RSSFeedResponse {
+    ): RssFeedResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Feed")) {
-            body = RSSFeedRequest(limit, name, offset)
+            body = RssFeedRequest(limit, name, offset)
         }
     }
 
@@ -50,7 +50,7 @@ object RSSService {
      * List the saved RSS fields
      * @since 0.1.0
      */
-    suspend fun list(): RSSListResponse {
+    suspend fun list(): RssListResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "List"))
     }
 
@@ -60,13 +60,13 @@ object RSSService {
      */
     suspend fun remove(name: String) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Remove")) {
-            body = RSSRemoveRequest(name)
+            body = RssRemoveRequest(name)
         }
     }
 
-    suspend fun RSSFeed.feed(limit: Int = 25, offset: Int = 0) = feed(
+    suspend fun RssFeed.feed(limit: Int = 25, offset: Int = 0) = feed(
         this.name, limit, offset
     )
 
-    suspend fun RSSFeed.remove() = remove(this.name)
+    suspend fun RssFeed.remove() = remove(this.name)
 }

@@ -13,14 +13,14 @@ private const val SERVICE = "evchargers"
  *
  * @since 0.1.0
  */
-object EVChargersService {
+object EvChargersService {
 
     /**
      * Retrieve reference data as used by this API and in conjunction with the
      * Search endpoint
      * @since 0.1.0
      */
-    suspend fun referenceData(): EVChargersReferenceDataResponse {
+    suspend fun referenceData(): EvChargersReferenceDataResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "ReferenceData"))
     }
 
@@ -30,20 +30,20 @@ object EVChargersService {
      * @since 0.1.0
      */
     suspend fun search(
-        box: EVChargerLocationBox = EVChargerLocationBox(EVChargerCoordinates(0.0, 0.0), EVChargerCoordinates(0.0, 0.0)),
+        box: EvChargerLocationBox = EvChargerLocationBox(EvChargerCoordinates(0.0, 0.0), EvChargerCoordinates(0.0, 0.0)),
         connectionTypes: List<String> = emptyList(),
         countryId: String = "",
         distance: Int = 5000,
         levels: List<String> = emptyList(),
-        location: EVChargerCoordinates = EVChargerCoordinates(0.0, 0.0),
+        location: EvChargerCoordinates = EvChargerCoordinates(0.0, 0.0),
         maxResults: Int = 100,
         minPower: Int = 0,
         operators: List<String> = emptyList(),
         usageTypes: List<String> = emptyList()
-    ): EVChargersSearchResponse {
+    ): EvChargersSearchResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Search")) {
             body = if (location.latitude == 0.0 && location.longitude == 0.0) {
-                EVChargersSearchBoxRequest(
+                EvChargersSearchBoxRequest(
                     box,
                     connectionTypes,
                     countryId,
@@ -55,7 +55,7 @@ object EVChargersService {
                     usageTypes
                 )
             } else {
-                EVChargersSearchLocationRequest(
+                EvChargersSearchLocationRequest(
                     connectionTypes,
                     countryId,
                     distance,

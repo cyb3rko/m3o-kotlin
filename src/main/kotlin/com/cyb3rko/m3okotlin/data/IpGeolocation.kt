@@ -3,10 +3,10 @@ package com.cyb3rko.m3okotlin.data
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class IPGeolocationRequest(val ip: String)
+internal data class IpGeolocationRequest(val ip: String)
 
 @Serializable
-data class IPGeolocationResponse(
+data class IpGeolocationResponse(
     val asn: Int? = null,
     val city: String? = null,
     val continent: String,
