@@ -18,7 +18,7 @@ object UrlsService {
 
     /**
      * Create a URL
-     * @since 0.2.3
+     * @since 0.2.4
      */
     suspend fun create(destinationUrl: String, id: String): UrlsCreateResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Create")) {
@@ -48,7 +48,7 @@ object UrlsService {
 
     /**
      * Resolve returns the destination URL of a short URL.
-     * @since 0.2.3
+     * @since 0.2.4
      */
     suspend fun resolve(shortUrl: String): UrlsResolveResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Resolve")) {

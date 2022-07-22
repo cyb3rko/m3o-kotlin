@@ -91,7 +91,7 @@ object AppsService {
 
     /**
      * Get the status of an app
-     * @since 0.2.3
+     * @since 0.2.4
      */
     suspend fun status(name: String): AppsStatusResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Status")) {
@@ -102,7 +102,7 @@ object AppsService {
     /**
      * Update the app. The latest source code will be downloaded, built and
      * deployed.
-     * @since 0.2.3
+     * @since 0.2.4
      */
     suspend fun update(name: String, envVars: Map<String, String> = mapOf()) {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Update")) {
