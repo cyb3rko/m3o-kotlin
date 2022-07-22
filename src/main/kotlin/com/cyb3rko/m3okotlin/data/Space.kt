@@ -1,6 +1,5 @@
 package com.cyb3rko.m3okotlin.data
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 // Requests & Responses + Data (single use)
@@ -8,8 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 internal data class SpaceCreateRequest(
     val name: String,
-    @SerialName("object")
-    val obj: String,
+    val `object`: String,
     val visibility: String
 )
 
@@ -29,7 +27,7 @@ data class SpaceDownloadResponse(val url: String)
 internal data class SpaceHeadRequest(val name: String)
 
 @Serializable
-data class SpaceHeadResponse(@SerialName("object") val obj: SpaceObjectMetaData)
+data class SpaceHeadResponse(val `object`: SpaceObjectMetaData)
 
 @Serializable
 internal data class SpaceListRequest(val prefix: String)
@@ -41,13 +39,12 @@ data class SpaceListResponse(val objects: List<SpaceObjectMetaData>)
 internal data class SpaceReadRequest(val name: String)
 
 @Serializable
-data class SpaceReadResponse(@SerialName("object") val obj: SpaceObject)
+data class SpaceReadResponse(val `object`: SpaceObject)
 
 @Serializable
 internal data class SpaceUpdateRequest(
     val name: String,
-    @SerialName("object")
-    val obj: String,
+    val `object`: String,
     val visibility: String
 )
 
