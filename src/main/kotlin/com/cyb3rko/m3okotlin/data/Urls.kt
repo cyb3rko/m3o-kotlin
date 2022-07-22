@@ -40,6 +40,15 @@ internal data class UrlsShortenRequest(@SerialName("destinationURL") val destina
 @Serializable
 data class UrlsShortenResponse(@SerialName("shortURL") val shortUrl: String)
 
+@Serializable
+internal data class UrlsUpdateRequest(
+    @SerialName("destinationURL")
+    val destinationUrl: String,
+    val id: String,
+    @SerialName("shortURL")
+    val shortUrl: String
+)
+
 // Data (multiple use)
 
 @Serializable

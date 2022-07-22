@@ -65,4 +65,18 @@ object UrlsService {
             body = UrlsShortenRequest(destinationUrl)
         }
     }
+
+    /**
+     * Update the destination for a short URL
+     * @since 0.2.4
+     */
+    suspend fun update(
+        destinationUrl: String,
+        id: String = "",
+        shortUrl: String = ""
+    ) {
+        return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Update")) {
+            body = UrlsUpdateRequest(destinationUrl, id, shortUrl)
+        }
+    }
 }
