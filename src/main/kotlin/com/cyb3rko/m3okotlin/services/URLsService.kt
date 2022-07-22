@@ -17,12 +17,22 @@ private const val SERVICE = "url"
 object URLsService {
 
     /**
+     * Create a URL
+     * @since 0.2.3
+     */
+    suspend fun create(destinationUrl: String, id: String): URLsCreateResponse {
+        return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Create")) {
+            body = URLsCreateRequest(destinationUrl, id)
+        }
+    }
+
+    /**
      * Delete a URL
      * @since 0.2.2
      */
-    suspend fun delete(shortURL: String) {
+    suspend fun delete(id: String = "", shortURL: String = "") {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
-            body = URLsDeleteRequest(shortURL)
+            body = URLsDeleteRequest(id, shortURL)
         }
     }
 
@@ -37,12 +47,12 @@ object URLsService {
     }
 
     /**
-     * Proxy returns the destination URL of a short URL.
-     * @since 0.1.0
+     * Resolve returns the destination URL of a short URL.
+     * @since 0.2.3
      */
-    suspend fun proxy(shortURL: String): URLsProxyResponse {
-        return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Proxy")) {
-            body = URLsProxyRequest(shortURL)
+    suspend fun resolve(shortUrl: String): URLsResolveResponse {
+        return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Resolve")) {
+            body = URLsResolveRequest(shortUrl)
         }
     }
 
