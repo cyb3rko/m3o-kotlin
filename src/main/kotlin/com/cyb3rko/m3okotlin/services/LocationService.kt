@@ -43,12 +43,12 @@ object LocationService {
      */
     suspend fun search(
         center: LocationCoordinates,
-        numEntities: Int,
+        limit: Int,
         radius: Int,
         type: String
     ): LocationSearchResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Search")) {
-            body = LocationSearchRequest(center, numEntities, radius, type)
+            body = LocationSearchRequest(center, limit, radius, type)
         }
     }
 

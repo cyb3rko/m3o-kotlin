@@ -14,7 +14,7 @@ internal data class LocationSaveRequest(val entity: Location)
 @Serializable
 internal data class LocationSearchRequest(
     val center: LocationCoordinates,
-    val numEntities: Int,
+    val limit: Int,
     val radius: Int,
     val type: String
 )
