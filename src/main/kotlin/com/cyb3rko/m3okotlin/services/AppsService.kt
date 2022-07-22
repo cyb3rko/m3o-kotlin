@@ -89,6 +89,27 @@ object AppsService {
         }
     }
 
+    /**
+     * Get the status of an app
+     * @since 0.2.3
+     */
+    suspend fun status(name: String): AppsStatusResponse {
+        return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Status")) {
+            body = AppsStatusRequest(name)
+        }
+    }
+
+    /**
+     * Update the app. The latest source code will be downloaded, built and
+     * deployed.
+     * @since 0.2.3
+     */
+    suspend fun update(name: String, envVars: Map<String, String> = mapOf()) {
+        return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Update")) {
+            body = AppsUpdateRequest(envVars, name)
+        }
+    }
+
     suspend fun App.delete() = delete(this.name)
 
     suspend fun App.logs(logsType: String) = logs(logsType, this.name)
@@ -109,4 +130,8 @@ object AppsService {
         branch,
         envVars
     )
+
+    suspend fun App.status() = status(this.name)
+
+    suspend fun App.update(envVars: Map<String, String>) = update(this.name, envVars)
 }
