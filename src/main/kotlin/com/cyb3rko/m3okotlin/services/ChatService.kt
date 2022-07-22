@@ -11,17 +11,17 @@ import kotlinx.serialization.json.Json
 private const val SERVICE = "chat"
 
 /**
- * **Real time messaging**
+ * **Instant messaging service**
  *
- * The Chat service is a programmable instant messaging API service which can
- * be used in any application to immediately create conversations.
+ * Chat enables creation of chat groups and instant messaging services.
+ * Programmatically join, invite, kick or ban users.
  *
  * @since 0.1.0
  */
 object ChatService {
 
     /**
-     * Create a new chat room
+     * Create a new group
      * @since 0.1.0
      */
     suspend fun create(
@@ -36,7 +36,7 @@ object ChatService {
     }
 
     /**
-     * Delete a chat room
+     * Delete a group
      * @since 0.1.0
      */
     suspend fun delete(groupId: String): ChatDeleteResponse {
@@ -56,7 +56,7 @@ object ChatService {
     }
 
     /**
-     * Invite a user to a chat room
+     * Invite a user to a group
      * @since 0.1.0
      */
     suspend fun invite(groupId: String, userId: String): ChatInviteResponse {
@@ -66,7 +66,7 @@ object ChatService {
     }
 
     /**
-     * Join a chat room
+     * Join a group
      * @since 0.1.0
      */
     fun join(
@@ -89,7 +89,7 @@ object ChatService {
     }
 
     /**
-     * Kick a user from a chat room
+     * Kick a user from a group
      * @since 0.1.0
      */
     suspend fun kick(groupId: String, userId: String): ChatKickResponse {
@@ -99,7 +99,7 @@ object ChatService {
     }
 
     /**
-     * Leave a chat room
+     * Leave a group
      * @since 0.1.0
      */
     suspend fun leave(groupId: String, userId: String): ChatLeaveResponse {
