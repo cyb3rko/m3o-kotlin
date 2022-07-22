@@ -11,41 +11,41 @@ internal data class ChatCreateRequest(
     val name: String,
     val private: Boolean,
     @SerialName("user_ids")
-    val userIDs: List<String>
+    val userIds: List<String>
 )
 
 @Serializable
-data class ChatCreateResponse(val room: ChatRoom)
+data class ChatCreateResponse(val group: ChatGroup)
 
 @Serializable
-internal data class ChatDeleteRequest(@SerialName("room_id") val roomID: String)
+internal data class ChatDeleteRequest(@SerialName("group_id") val groupId: String)
 
 @Serializable
-data class ChatDeleteResponse(val room: ChatRoom)
+data class ChatDeleteResponse(val group: ChatGroup)
 
 @Serializable
-internal data class ChatHistoryRequest(@SerialName("room_id") val roomID: String)
+internal data class ChatHistoryRequest(@SerialName("group_id") val groupId: String)
 
 @Serializable
 data class ChatHistoryResponse(val messages: List<ChatMessage>)
 
 @Serializable
 internal data class ChatInviteRequest(
-    @SerialName("room_id")
-    val roomID: String,
+    @SerialName("group_id")
+    val groupId: String,
     @SerialName("user_id")
-    val userID: String
+    val userId: String
 )
 
 @Serializable
-data class ChatInviteResponse(val room: ChatRoom)
+data class ChatInviteResponse(val group: ChatGroup)
 
 @Serializable
 internal data class ChatJoinRequest(
-    @SerialName("room_id")
-    val roomID: String,
+    @SerialName("group_id")
+    val groupId: String,
     @SerialName("user_id")
-    val userID: String
+    val userId: String
 )
 
 @Serializable
@@ -53,41 +53,41 @@ data class ChatJoinResponse(val message: ChatMessage)
 
 @Serializable
 internal data class ChatKickRequest(
-    @SerialName("room_id")
-    val roomID: String,
+    @SerialName("group_id")
+    val groupId: String,
     @SerialName("user_id")
-    val userID: String
+    val userId: String
 )
 
 @Serializable
-data class ChatKickResponse(val room: ChatRoom)
+data class ChatKickResponse(val group: ChatGroup)
 
 @Serializable
 internal data class ChatLeaveRequest(
-    @SerialName("room_id")
-    val roomID: String,
+    @SerialName("group_id")
+    val groupId: String,
     @SerialName("user_id")
-    val userID: String
+    val userId: String
 )
 
 @Serializable
-data class ChatLeaveResponse(val room: ChatRoom)
+data class ChatLeaveResponse(val group: ChatGroup)
 
 @Serializable
-internal data class ChatListRequest(@SerialName("user_id") val userID: String)
+internal data class ChatListRequest(@SerialName("user_id") val userId: String)
 
 @Serializable
-data class ChatListResponse(val rooms: List<ChatRoom>)
+data class ChatListResponse(val groups: List<ChatGroup>)
 
 @Serializable
 internal data class ChatSendRequest(
     val client: String,
-    @SerialName("room_id")
-    val roomID: String,
+    @SerialName("group_id")
+    val groupId: String,
     val subject: String,
     val text: String,
     @SerialName("user_id")
-    val userID: String
+    val userId: String
 )
 
 @Serializable
@@ -99,18 +99,18 @@ data class ChatSendResponse(val message: ChatMessage)
 data class ChatMessage(
     val client: String,
     val id: String,
-    @SerialName("room_id")
-    val roomID: String,
+    @SerialName("group_id")
+    val groupId: String,
     @SerialName("sent_at")
     val sentAt: String,
     val subject: String,
     val text: String,
     @SerialName("user_id")
-    val userID: String
+    val userId: String
 )
 
 @Serializable
-data class ChatRoom(
+data class ChatGroup(
     @SerialName("created_at")
     val createdAt: String,
     val description: String,
@@ -118,5 +118,5 @@ data class ChatRoom(
     val name: String,
     val private: Boolean,
     @SerialName("user_ids")
-    val userIDs: List<String>
+    val userIds: List<String>
 )

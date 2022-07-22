@@ -28,10 +28,10 @@ object ChatService {
         description: String,
         name: String,
         private: Boolean = false,
-        userIDs: List<String> = listOf()
+        userIds: List<String> = listOf()
     ): ChatCreateResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Create")) {
-            body = ChatCreateRequest(description, name, private, userIDs)
+            body = ChatCreateRequest(description, name, private, userIds)
         }
     }
 
@@ -39,9 +39,9 @@ object ChatService {
      * Delete a chat room
      * @since 0.1.0
      */
-    suspend fun delete(roomID: String): ChatDeleteResponse {
+    suspend fun delete(groupId: String): ChatDeleteResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Delete")) {
-            body = ChatDeleteRequest(roomID)
+            body = ChatDeleteRequest(groupId)
         }
     }
 
@@ -49,9 +49,9 @@ object ChatService {
      * List the messages in a chat
      * @since 0.1.0
      */
-    suspend fun history(roomID: String): ChatHistoryResponse {
+    suspend fun history(groupId: String): ChatHistoryResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "History")) {
-            body = ChatHistoryRequest(roomID)
+            body = ChatHistoryRequest(groupId)
         }
     }
 
@@ -59,9 +59,9 @@ object ChatService {
      * Invite a user to a chat room
      * @since 0.1.0
      */
-    suspend fun invite(roomID: String, userID: String): ChatInviteResponse {
+    suspend fun invite(groupId: String, userId: String): ChatInviteResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Invite")) {
-            body = ChatInviteRequest(roomID, userID)
+            body = ChatInviteRequest(groupId, userId)
         }
     }
 
@@ -70,14 +70,14 @@ object ChatService {
      * @since 0.1.0
      */
     fun join(
-        roomID: String,
-        userID: String,
+        groupId: String,
+        userId: String,
         action: (Exception?, ChatJoinResponse?) -> Unit
     ): WebSocket {
         val url = M3O.getUrl(SERVICE, "Join", true)
         val socket = WebSocket(
             url,
-            Json.encodeToString(ChatJoinRequest(roomID, userID))
+            Json.encodeToString(ChatJoinRequest(groupId, userId))
         ) { e, response ->
             action(
                 e,
@@ -92,9 +92,9 @@ object ChatService {
      * Kick a user from a chat room
      * @since 0.1.0
      */
-    suspend fun kick(roomID: String, userID: String): ChatKickResponse {
+    suspend fun kick(groupId: String, userId: String): ChatKickResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Kick")) {
-            body = ChatKickRequest(roomID, userID)
+            body = ChatKickRequest(groupId, userId)
         }
     }
 
@@ -102,9 +102,9 @@ object ChatService {
      * Leave a chat room
      * @since 0.1.0
      */
-    suspend fun leave(roomID: String, userID: String): ChatLeaveResponse {
+    suspend fun leave(groupId: String, userId: String): ChatLeaveResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Leave")) {
-            body = ChatLeaveRequest(roomID, userID)
+            body = ChatLeaveRequest(groupId, userId)
         }
     }
 
@@ -112,9 +112,9 @@ object ChatService {
      * List available chats
      * @since 0.1.0
      */
-    suspend fun list(userID: String = ""): ChatListResponse {
+    suspend fun list(userId: String = ""): ChatListResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "List")) {
-            body = ChatListRequest(userID)
+            body = ChatListRequest(userId)
         }
     }
 
@@ -125,34 +125,34 @@ object ChatService {
      */
     suspend fun send(
         client: String,
-        roomID: String,
+        groupId: String,
         subject: String,
         text: String,
-        userID: String
+        userId: String
     ): ChatSendResponse {
         return M3O.ktorHttpClient.post(M3O.getUrl(SERVICE, "Send")) {
-            body = ChatSendRequest(client, roomID, subject, text, userID)
+            body = ChatSendRequest(client, groupId, subject, text, userId)
         }
     }
 
-    suspend fun ChatRoom.delete() = delete(this.id)
+    suspend fun ChatGroup.delete() = delete(this.id)
 
-    suspend fun ChatRoom.history() = history(this.id)
+    suspend fun ChatGroup.history() = history(this.id)
 
-    suspend fun ChatRoom.invite(userID: String) = invite(this.id, userID)
+    suspend fun ChatGroup.invite(userId: String) = invite(this.id, userId)
 
-    fun ChatRoom.join(userID: String, action: (Exception?, ChatJoinResponse?) -> Unit) = join(
-        this.id, userID, action
+    fun ChatGroup.join(userId: String, action: (Exception?, ChatJoinResponse?) -> Unit) = join(
+        this.id, userId, action
     )
 
-    suspend fun ChatRoom.kick(userID: String) = kick(this.id, userID)
+    suspend fun ChatGroup.kick(userId: String) = kick(this.id, userId)
 
-    suspend fun ChatRoom.leave(userID: String) = leave(this.id, userID)
+    suspend fun ChatGroup.leave(userId: String) = leave(this.id, userId)
 
-    suspend fun ChatRoom.send(
+    suspend fun ChatGroup.send(
         client: String,
         subject: String,
         text: String,
-        userID: String
-    ) = send(client, this.id, subject, text, userID)
+        userId: String
+    ) = send(client, this.id, subject, text, userId)
 }
