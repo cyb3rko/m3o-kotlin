@@ -7,9 +7,7 @@ apply plugin: 'maven-publish'
 def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 
-def getVersionName = { ->
-    return "0.2.2"
-}
+def libraryVersion = "0.2.3"
 
 def getArtificatId = { ->
     return "m3okotlin"
@@ -20,7 +18,7 @@ publishing {
         bar(MavenPublication) {
             groupId 'com.cyb3rko'
             artifactId getArtificatId()
-            version getVersionName()
+            version libraryVersion
             artifact("build/libs/m3o-kotlin.jar")
         }
     }
@@ -39,7 +37,7 @@ publishing {
 }
 
 group 'com.cyb3rko'
-version '0.2.2'
+version libraryVersion
 
 repositories {
     mavenCentral()
