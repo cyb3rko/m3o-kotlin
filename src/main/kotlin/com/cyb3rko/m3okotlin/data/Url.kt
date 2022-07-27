@@ -6,42 +6,42 @@ import kotlinx.serialization.Serializable
 // Requests & Responses + Data (single use)
 
 @Serializable
-internal data class UrlsCreateRequest(
+internal data class UrlCreateRequest(
     @SerialName("destinationURL")
     val destinationUrl: String,
     val id: String
 )
 
 @Serializable
-data class UrlsCreateResponse(val url: Url)
+data class UrlCreateResponse(val url: Url)
 
 @Serializable
-internal data class UrlsDeleteRequest(
+internal data class UrlDeleteRequest(
     val id: String,
     @SerialName("shortURL")
     val shortUrl: String
 )
 
 @Serializable
-internal data class UrlsListRequest(@SerialName("shortURL") val shortUrl: String)
+internal data class UrlListRequest(@SerialName("shortURL") val shortUrl: String)
 
 @Serializable
-data class UrlsListResponse(val urlPairs: List<Url>)
+data class UrlListResponse(val urlPairs: List<Url>)
 
 @Serializable
-internal data class UrlsResolveRequest(@SerialName("shortURL") val shortUrl: String)
+internal data class UrlResolveRequest(@SerialName("shortURL") val shortUrl: String)
 
 @Serializable
-data class UrlsResolveResponse(@SerialName("destinationURL") val destinationUrl: String)
+data class UrlResolveResponse(@SerialName("destinationURL") val destinationUrl: String)
 
 @Serializable
-internal data class UrlsShortenRequest(@SerialName("destinationURL") val destinationUrl: String)
+internal data class UrlShortenRequest(@SerialName("destinationURL") val destinationUrl: String)
 
 @Serializable
-data class UrlsShortenResponse(@SerialName("shortURL") val shortUrl: String)
+data class UrlShortenResponse(@SerialName("shortURL") val shortUrl: String)
 
 @Serializable
-internal data class UrlsUpdateRequest(
+internal data class UrlUpdateRequest(
     @SerialName("destinationURL")
     val destinationUrl: String,
     val id: String,
