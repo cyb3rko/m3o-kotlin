@@ -7,8 +7,11 @@ import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.isActive
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 object M3O {
     private const val BASE_URL = "https://api.m3o.com/v1"
@@ -17,6 +20,7 @@ object M3O {
     internal lateinit var ktorHttpClient: HttpClient
     private lateinit var ktorHttpMultipartClient: HttpClient
     private lateinit var ktorHttpRedirectClient: HttpClient
+    private lateinit var onReceivedError: (title: String, message: String, e: Exception) -> Unit
 
     fun initialize(apiKey: String) {
         Log.initialize()
@@ -41,6 +45,8 @@ object M3O {
                 header(HttpHeaders.Authorization, authorization.second)
             }
 
+            installResponseValidator()
+
             // Logging for debugging
 
 //            install(Logging) {
@@ -55,6 +61,44 @@ object M3O {
         }
 
         Log.i("Ktor M3O Client initialized.")
+    }
+
+    fun registerResponseValidation(
+        onReceivedError: (title: String, message: String, e: Exception) -> Unit
+    ): M3O {
+        this.onReceivedError = onReceivedError
+        Log.i("Ktor Response Validation registered")
+        return this
+    }
+
+    private fun HttpClientConfig<*>.installResponseValidator() {
+        if (this@M3O::onReceivedError.isInitialized) {
+            this.HttpResponseValidator {
+                handleResponseException {
+                    val clientException = it as? ClientRequestException
+                    val serverException: ServerResponseException?
+
+                    val response: String
+                    if (clientException != null) {
+                        response = clientException.response.readText()
+                    } else {
+                        serverException = it as? ServerResponseException
+                        response = serverException?.response?.readText() ?: it.message.toString()
+                    }
+                    try {
+                        val errorInformation = Json.decodeFromString<CustomError>(response)
+                        val title = errorInformation.status
+                        val message = when (errorInformation.code) {
+                            HttpStatusCode.Unauthorized.value -> "Your API Key may be invalid"
+                            else -> errorInformation.detail
+                        }
+                        onReceivedError(title, message, it as Exception)
+                    } catch (_: Exception) {
+                        onReceivedError("An Error Occurred", response, it as Exception)
+                    }
+                }
+            }
+        }
     }
 
     fun terminate() {
@@ -84,6 +128,8 @@ object M3O {
                 install(DefaultRequest) {
                     header(HttpHeaders.Authorization, authorization.second)
                 }
+
+                installResponseValidator()
 
                 // Logging for debugging
 
@@ -119,6 +165,8 @@ object M3O {
                     header(HttpHeaders.ContentType, ContentType.Application.Json)
                     header(HttpHeaders.Authorization, authorization.second)
                 }
+
+                installResponseValidator()
 
                 // Logging for debugging
 
