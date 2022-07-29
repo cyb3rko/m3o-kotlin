@@ -13,13 +13,13 @@ private const val SERVICE = "wallet"
  * A virtual wallet you to manage multiple currencies from anywhere. Credit,
  * debit, transfer and more.
  *
- * @since 0.2.5
+ * @since 0.3.0
  */
 object WalletService {
 
     /**
      * Get the balance of a wallet
-     * @since 0.2.5
+     * @since 0.3.0
      */
     suspend fun balance(id: String): WalletBalanceResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Balance")) {
@@ -29,7 +29,7 @@ object WalletService {
 
     /**
      * Create a new wallet
-     * @since 0.2.5
+     * @since 0.3.0
      */
     suspend fun create(
         description: String = "",
@@ -43,7 +43,7 @@ object WalletService {
 
     /**
      * Add credit to a wallet
-     * @since 0.2.5
+     * @since 0.3.0
      */
     suspend fun credit(
         amount: Int,
@@ -59,7 +59,7 @@ object WalletService {
 
     /**
      * Debit a wallet
-     * @since 0.2.5
+     * @since 0.3.0
      */
     suspend fun debit(
         amount: Int,
@@ -75,7 +75,7 @@ object WalletService {
 
     /**
      * Delete a wallet
-     * @since 0.2.5
+     * @since 0.3.0
      */
     suspend fun delete(id: String) {
         return ktorHttpClient.post(getUrl(SERVICE, "Delete")) {
@@ -85,7 +85,7 @@ object WalletService {
 
     /**
      * List your wallets
-     * @since 0.2.5
+     * @since 0.3.0
      */
     suspend fun list(): WalletListResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "List"))
@@ -93,7 +93,7 @@ object WalletService {
 
     /**
      * Get wallet by id
-     * @since 0.2.5
+     * @since 0.3.0
      */
     suspend fun read(id: String): WalletReadResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Read")) {
@@ -103,7 +103,7 @@ object WalletService {
 
     /**
      * List the transactions for a wallet
-     * @since 0.2.5
+     * @since 0.3.0
      */
     suspend fun transactions(id: String): WalletTransactionsResponse {
         return ktorHttpClient.post(getUrl(SERVICE, "Transactions")) {
@@ -113,7 +113,7 @@ object WalletService {
 
     /**
      * Make a transfer from one wallet to another
-     * @since 0.2.5
+     * @since 0.3.0
      */
     suspend fun transfer(
         amount: Int,

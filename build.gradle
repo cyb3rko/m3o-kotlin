@@ -8,7 +8,7 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 
 def libraryArtifactId = "m3okotlin"
-def libraryVersion = "0.2.3"
+def libraryVersion = "0.3.0"
 
 publishing {
     publications {
