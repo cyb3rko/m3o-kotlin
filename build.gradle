@@ -8,7 +8,7 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 
 def libraryArtifactId = "m3okotlin"
-def libraryVersion = "0.3.1"
+def libraryVersion = "0.3.2"
 
 publishing {
     publications {
@@ -16,7 +16,7 @@ publishing {
             groupId 'com.cyb3rko'
             artifactId libraryArtifactId
             version libraryVersion
-            artifact("build/libs/m3o-kotlin.jar")
+            artifact("build/libs/m3o-kotlin-${libraryVersion}.jar")
         }
     }
 
