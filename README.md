@@ -208,56 +208,58 @@ Below all supported APIs:
 | 15 | DNS | :x: |
 | 16 | Email | :x: |
 | 17 | Emoji | :x: |
-| 18 | EV Chargers | :x: |
-| 19 | Events | :x: |
-| 20 | Files | :white_check_mark: |
-| 21 | Forex | :x: |
-| 22 | Functions | :white_check_mark: |
-| 23 | Geocoding | :x: |
-| 24 | GIFs | :x: |
-| 25 | Google | :x: |
-| 26 | Hello World | :x: |
-| 27 | Holidays | :white_check_mark: |
-| 28 | ID | :x: |
-| 29 | Image | :x: |
-| 30 | IP Geolocation | :x: |
-| 31 | Jokes | :x: |
-| 32 | Lists | :white_check_mark: |
-| 33 | Location | :white_check_mark: |
-| 34 | Memegen | :white_check_mark: |
-| 35 | Minecraft | :x: |
-| 36 | Movies | :x: |
-| 37 | MQ | :x: |
-| 38 | News | :x: |
-| 39 | NFTs | :white_check_mark: |
-| 40 | Notes | :white_check_mark: |
-| 41 | OTP | :x: |
-| 42 | Passwords | :x: |
-| 43 | Ping | :x: |
-| 44 | Places |  |
-| 45 | Postcode | :x: |
-| 46 | Prayer | :x: |
-| 47 | Prices | :white_check_mark: |
-| 48 | QR Codes | :x: |
-| 49 | Quran | :white_check_mark: |
-| 50 | Routing | :x: |
-| 51 | RSS | :white_check_mark: |
-| 52 | Search | :x: |
-| 53 | Sentiment | :x: |
-| 54 | SMS | :x: |
-| 55 | Space | :white_check_mark: |
-| 56 | Spam | :x: |
-| 57 | Stocks | :x: |
-| 58 | Stream | :white_check_mark: |
-| 59 | Sunnah | :white_check_mark: |
-| 60 | Thumbnail | :x: |
-| 61 | Time | :x: |
-| 62 | Translate | :x: |
-| 63 | Tunnel | :x: |
-| 64 | Twitter | :white_check_mark: |
-| 65 | URLs | :x: |
-| 66 | Users | :white_check_mark: |
-| 67 | Vehicle | :x: |
-| 68 | Weather | :x: |
-| 69 | Wordle | :x: |
-| 70 | YouTube | :white_check_mark: |
+| 18 | Ethereum | :x: |
+| 19 | EV Chargers | :x: |
+| 20 | Events | :x: |
+| 21 | Files | :white_check_mark: |
+| 22 | Forex | :x: |
+| 23 | Functions | :white_check_mark: |
+| 24 | Geocoding | :x: |
+| 25 | GIFs | :x: |
+| 26 | Google | :x: |
+| 27 | Hello World | :x: |
+| 28 | Holidays | :white_check_mark: |
+| 29 | ID | :x: |
+| 30 | Image | :x: |
+| 31 | IP Geolocation | :x: |
+| 32 | Jokes | :x: |
+| 33 | Lists | :white_check_mark: |
+| 34 | Location | :white_check_mark: |
+| 35 | Memegen | :white_check_mark: |
+| 36 | Minecraft | :x: |
+| 37 | Movies | :x: |
+| 38 | MQ | :x: |
+| 39 | News | :x: |
+| 40 | NFTs | :white_check_mark: |
+| 41 | Notes | :white_check_mark: |
+| 42 | OTP | :x: |
+| 43 | Passwords | :x: |
+| 44 | Ping | :x: |
+| 45 | Places | |
+| 46 | Postcode | :x: |
+| 47 | Prayer | :x: |
+| 48 | Prices | :white_check_mark: |
+| 49 | QR Codes | :x: |
+| 50 | Quran | :white_check_mark: |
+| 51 | Routing | :x: |
+| 52 | RSS | :white_check_mark: |
+| 53 | Search | :x: |
+| 54 | Sentiment | :x: |
+| 55 | SMS | :x: |
+| 56 | Space | :white_check_mark: |
+| 57 | Spam | :x: |
+| 58 | Stocks | :x: |
+| 59 | Stream | :white_check_mark: |
+| 60 | Sunnah | :white_check_mark: |
+| 61 | Thumbnail | :x: |
+| 62 | Time | :x: |
+| 63 | Translate | :x: |
+| 64 | Tunnel | :x: |
+| 65 | Twitter | :white_check_mark: |
+| 66 | URL | :x: |
+| 67 | Users | :white_check_mark: |
+| 68 | Vehicle | :x: |
+| 69 | Wallet | :white_check_mark: |
+| 70 | Weather | :x: |
+| 71 | Wordle | :x: |
+| 72 | YouTube | :white_check_mark: |
